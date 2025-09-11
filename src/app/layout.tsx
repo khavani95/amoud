@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Amoud App",
+  title: "Amoud co",
   description: "Project with Vazirmatn font",
 };
 

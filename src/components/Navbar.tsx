@@ -13,7 +13,7 @@ export default function Navbar() {
         {/* منو سمت چپ */}
         <ul className="flex gap-x-10 text-gray-800 font-medium order-1">
           <li>
-            <Link href="/">خانه</Link>
+            <Link href="/home">خانه</Link>
           </li>
 
           {/* منوی پروژه‌ها */}
