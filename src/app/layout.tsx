@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Vazirmatn } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -55,7 +56,7 @@ export default function RootLayout({
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 </head>
 
-      <body className="font-vazir bg-gray-50">{children}</body>
+      <body className="font-vazir bg-gray-50">{children} <SpeedInsights /></body>
     </html>
   );
 }
