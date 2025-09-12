@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Amoud",
     description: "شرکت آمودگسترآتیه",
     url: "https://amoud-henna.vercel.app", // لینک سایتت
-    siteName: "Amoud Co",
+    siteName: "Amoud",
     images: [
       {
         url: "/logo.png", // اینجا لوگوت به صورت thumbnail نشون داده میشه
