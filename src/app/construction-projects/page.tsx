@@ -17,7 +17,21 @@ const projects = [
     fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
     images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
   },
-  { id: 2, title: "پروژه اداری شیراز", shortDesc: "ساختمان اداری ۵ طبقه با معماری مدرن", fullDesc: "ساختمان اداری با طراحی مدرن و امکانات کامل...", images: ["/projects/shiraz1.jpg", "/projects/shiraz2.jpg"], }, { id: 3, title: "پروژه ویلایی کیش", shortDesc: "ویلاهای لوکس ساحلی", fullDesc: "ویلاهای لوکس در کیش با چشم‌انداز دریا و امکانات رفاهی...", images: ["/projects/kish1.jpg", "/projects/kish2.jpg", "/projects/kish3.jpg"], },
+  {
+    id: 2,
+    title: "پروژه مسکونی تهران",
+    shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
+    fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
+    images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
+  },
+  {
+    id: 3,
+    title: "پروژه مسکونی تهران",
+    shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
+    fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
+    images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
+  },
+  
 ];
 
 export default function ConstructionProjects() {
