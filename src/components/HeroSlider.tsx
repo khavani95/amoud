@@ -6,13 +6,13 @@ const projects = [
     title: "برج‌های مسکونی همت ۲",
     desc: "پروژه تاسیسات الکتریکال در بلوار طبیعت",
     img: "/projects/Yas-Residential-Towers.webp",
-    link: "/projects/building/hemt",
+    link: "/contracting-projects#project-1/",
   },
   {
     title: "پروژه ۲۸۰۰ واحدی آسمان البرز",
     desc: "بلوک‌های تیپ M و C",
     img: "/projects/Aseman-alborz.jpg",
-    link: "/projects/building/alborz",
+    link: "/contracting-projects#project-2/",
   },
 ];
 
