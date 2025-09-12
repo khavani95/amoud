@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Amoud co",
+  title: "Amoud",
   description: "شرکت آمودگسترآتیه",
   icons: {
     icon: "/logo.png", // favicon
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   openGraph: {
-    title: "Amoud co",
+    title: "Amoud",
     description: "شرکت آمودگسترآتیه",
     url: "https://amoud-henna.vercel.app", // لینک سایتت
     siteName: "Amoud Co",
