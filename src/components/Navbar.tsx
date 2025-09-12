@@ -23,10 +23,10 @@ export default function Navbar() {
             <button className="hover:text-blue-600">پروژه‌ها</button>
             <ul className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-56 text-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
               <li className="px-4 py-2 hover:bg-gray-100">
-                <Link href="/projects/building">پروژه‌های ساخت‌وساز</Link>
+                <Link href="/construction-projects">پروژه‌های ساخت‌وساز</Link>
               </li>
               <li className="px-4 py-2 hover:bg-gray-100">
-                <Link href="/projects/contracting">پروژه‌های پیمانکاری</Link>
+                <Link href="/contracting-projects">پروژه‌های پیمانکاری</Link>
               </li>
             </ul>
           </li>

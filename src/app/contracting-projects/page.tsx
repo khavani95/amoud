@@ -4,19 +4,33 @@ import Footer from "@/components/Footer";
 
 export default function ContractingProjects() {
   return (
-    <div>
-       <Navbar />
-      <h2 className="text-4xl font-bold text-gray-800 text-center mb-8">پروژه‌های پیمانکاری</h2>
-      <p className="text-gray-700">
-        شرکت عمود مجری تخصصی پروژه‌های پیمانکاری در حوزه‌های مختلف است.
-      </p>
-      <ul className="mt-6 space-y-3">
-        <li className="bg-white shadow p-4 rounded">پروژه تاسیسات بیمارستان مرکزی</li>
+    <div className="flex flex-col min-h-screen font-vazirmatn">
+      {/* منوبار */}
+      <Navbar />
+
+      {/* محتوای اصلی */}
+      <main className="flex-grow pt-20 bg-gray-50">
+        <div className="container mx-auto px-6 py-12 max-w-4xl">
+          {/* عنوان */}
+          <h1 className="text-4xl font-bold text-gray-800 text-center mb-8">
+           پروژه‌های ساخت‌وساز
+          </h1>
+          <h1 className="text-2xl text-gray-500 text-center mb-8">
+             لیست پروژه های پیمانکاری </h1>
+
+         
+          <div className="bg-white shadow-md rounded-2xl p-8 leading-8 text-gray-700 space-y-6">
+             <ul className="mt-6 space-y-3">
+         <li className="bg-white shadow p-4 rounded">پروژه تاسیسات بیمارستان مرکزی</li>
         <li className="bg-white shadow p-4 rounded">پروژه برق‌کشی مجتمع اداری</li>
         <li className="bg-white shadow p-4 rounded">پروژه خطوط لوله صنعتی</li>
       </ul>
+          </div>
+        </div>
+      </main>
+
       {/* فوتر */}
-            <Footer />
+      <Footer />
     </div>
-  )
+  );
 }
