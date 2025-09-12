@@ -16,7 +16,7 @@ export default function Splash() {
  return (
   <div className="flex items-center justify-center h-screen bg-white">
     <img
-      src="/AMUD3.svg"
+      src="/Amud.gif"
       alt="لوگو آمود"
       className="w-[550px] h-[550px]" // لوگو سه برابر
     />
