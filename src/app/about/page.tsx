@@ -2,7 +2,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-export default function About({ children }: { children: React.ReactNode }) {
+export default function About() {
   return (
     <div className="flex flex-col min-h-screen font-vazirmatn">
       {/* منوبار */}

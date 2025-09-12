@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import HeroSlider from "@/components/HeroSlider";  
 import Footer from "@/components/Footer";  
 
-export default function HomeLayout({ children }: { children: React.ReactNode }) {
+export default function HomeLayout() {
   return (
     <main className="bg-gray-50 font-vazirmatn">
       <Navbar />
