@@ -55,10 +55,10 @@ export default function Navbar() {
               <Link href="/home" onClick={() => setIsOpen(false)}>خانه</Link>
             </li>
             <li>
-              <Link href="/projects/building" onClick={() => setIsOpen(false)}>پروژه‌های ساخت‌وساز</Link>
+              <Link href="/construction-projects" onClick={() => setIsOpen(false)}>پروژه‌های ساخت‌وساز</Link>
             </li>
             <li>
-              <Link href="/projects/contracting" onClick={() => setIsOpen(false)}>پروژه‌های پیمانکاری</Link>
+              <Link href="/contracting-projects" onClick={() => setIsOpen(false)}>پروژه‌های پیمانکاری</Link>
             </li>
             <li>
               <Link href="/about" onClick={() => setIsOpen(false)}>درباره ما</Link>
