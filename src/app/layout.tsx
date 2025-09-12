@@ -18,7 +18,28 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Amoud co",
-  description: "Project with Vazirmatn font",
+  description: "شرکت آمودگسترآتیه",
+  icons: {
+    icon: "/logo.png", // favicon
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    title: "Amoud co",
+    description: "شرکت آمودگسترآتیه",
+    url: "https://amoud-henna.vercel.app", // لینک سایتت
+    siteName: "Amoud Co",
+    images: [
+      {
+        url: "/logo.png", // اینجا لوگوت به صورت thumbnail نشون داده میشه
+        width: 600,
+        height: 600,
+        alt: "لوگو آمود",
+      },
+    ],
+    locale: "fa_IR",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
