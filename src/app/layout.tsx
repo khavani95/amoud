@@ -20,9 +20,9 @@ export const metadata: Metadata = {
   title: "Amoud",
   description: "شرکت آمودگسترآتیه",
   icons: {
-    icon: "/logo.png", // favicon
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: "/logo192.png", // favicon
+    shortcut: "/logo192.png",
+    apple: "/logo192.png",
   },
   openGraph: {
     title: "Amoud",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: "Amoud",
     images: [
       {
-        url: "/logo.png", // اینجا لوگوت به صورت thumbnail نشون داده میشه
+        url: "/logo192.png", // اینجا لوگوت به صورت thumbnail نشون داده میشه
         width: 600,
         height: 600,
         alt: "لوگو آمود",
