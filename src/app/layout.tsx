@@ -49,6 +49,12 @@ export default function RootLayout({
 }>) {
   return (
      <html lang="fa" dir="rtl" className={vazir.variable}>
+     <head>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+</head>
+
       <body className="font-vazir bg-gray-50">{children}</body>
     </html>
   );
