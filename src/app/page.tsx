@@ -13,16 +13,13 @@ export default function Splash() {
     return () => clearTimeout(timer);
   }, [router]);
 
-  return (
-    <div className="flex items-center justify-center h-screen bg-white">
-      <motion.img
-        src="/amud.gif"
-        alt="لوگو آمود"
-        className="w-[550px] h-[550px]" // لوگو سه برابر
-        initial={{ opacity: 1, scale: 1 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0 }}
-      />
-    </div>
-  );
+ return (
+  <div className="flex items-center justify-center h-screen bg-white">
+    <img
+      src="/amud.gif"
+      alt="لوگو آمود"
+      className="w-[550px] h-[550px]" // لوگو سه برابر
+    />
+  </div>
+);
 }
