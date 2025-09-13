@@ -9,6 +9,7 @@ import "swiper/css/thumbs";
 import "swiper/css/navigation";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import type { Swiper as SwiperClass } from "swiper"; // 👈 تایپ Swiper
 
 /*
   پروژه‌ها — لطفاً این آرایه را هر وقت خواستید با محتوا و تصاویر واقعی‌تان بروزرسانی کنید.
@@ -40,29 +41,29 @@ const projects = [
 
 export default function ConstructionProjects() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+
+  // 👇 به جای any از SwiperClass | null استفاده می‌کنیم
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
 
   // برای modal: نگه داشتن پروژه‌ای که full-screen باز شده و index تصویر شروع
   const [fullscreenProject, setFullscreenProject] = useState<
     { project: typeof projects[0]; startIndex: number } | null
   >(null);
-  const [fullscreenThumbs, setFullscreenThumbs] = useState<any>(null);
+  const [fullscreenThumbs, setFullscreenThumbs] = useState<SwiperClass | null>(null);
 
   // باز و بسته کردن پروژه + ست کردن hash در URL
   const toggleProject = (id: number) => {
     setActiveProject((prev) => (prev === id ? null : id));
     if (activeProject === id) {
-      // اگر بستن شد → hash پاک میشه
       history.replaceState(null, "", window.location.pathname);
     } else {
-      // اگر باز شد → hash ست میشه
       window.location.hash = `project-${id}`;
     }
   };
 
   // وقتی صفحه لود شد، hash موجود رو بخونه و تب مربوطه رو باز کنه
   useEffect(() => {
-    const hash = window.location.hash; // مثل "#project-2"
+    const hash = window.location.hash;
     if (hash) {
       const match = hash.match(/project-(\d+)/);
       if (match) {
@@ -83,7 +84,7 @@ export default function ConstructionProjects() {
     }
   }, [fullscreenProject]);
 
-  return (
+return (
     <div className="flex flex-col min-h-screen font-vazirmatn">
       <Navbar />
 
@@ -273,3 +274,4 @@ export default function ConstructionProjects() {
     </div>
   );
 }
+

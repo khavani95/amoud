@@ -68,6 +68,14 @@ export default function ContractingProjects() {
       if (match) {
         const projectId = parseInt(match[1], 10);
         setActiveProject(projectId);
+
+        // اسکرول نرم به اون تب
+        const el = document.getElementById(`project-${projectId}`);
+        if (el) {
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 300);
+        }
       }
     }
   }, []);
@@ -90,10 +98,10 @@ export default function ContractingProjects() {
       <main className="flex-grow pt-20 bg-gradient-to-b from-gray-50 to-gray-100">
         <div className="container mx-auto px-6 py-12 max-w-4xl">
           <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">
-            پروژه‌های ساخت‌وساز
+            پروژه‌های پیمانکاری
           </h1>
           <p className="text-lg text-gray-500 text-center mb-12">
-            لیست پروژه‌های ساختمانی مسکونی (خرید یا مشارکت در ساخت)
+          لیست پروژه‌های مسکونی، بیمارستانی، اداری، تجاری و... پیمانکاری (ابنیه ، برق و مکانیک)
           </p>
 
           {/* لیست پروژه‌ها */}
