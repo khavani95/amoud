@@ -2,19 +2,13 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Thumbs, Navigation } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/thumbs";
 import "swiper/css/navigation";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import type { Swiper as SwiperClass } from "swiper"; // 👈 تایپ Swiper
 
-/*
-  پروژه‌ها — لطفاً این آرایه را هر وقت خواستید با محتوا و تصاویر واقعی‌تان بروزرسانی کنید.
-  من هیچ‌یک از آیتم‌ها یا توضیحات را حذف نکردم — دقیقاً همان‌چیزی که فرستادید نگه داشته شده.
-*/
 const projects = [
   {
     id: 1,
@@ -42,14 +36,10 @@ const projects = [
 export default function ConstructionProjects() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
 
-  // 👇 به جای any از SwiperClass | null استفاده می‌کنیم
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
-
   // برای modal: نگه داشتن پروژه‌ای که full-screen باز شده و index تصویر شروع
   const [fullscreenProject, setFullscreenProject] = useState<
     { project: typeof projects[0]; startIndex: number } | null
   >(null);
-  const [fullscreenThumbs, setFullscreenThumbs] = useState<SwiperClass | null>(null);
 
   // باز و بسته کردن پروژه + ست کردن hash در URL
   const toggleProject = (id: number) => {
@@ -84,7 +74,7 @@ export default function ConstructionProjects() {
     }
   }, [fullscreenProject]);
 
-return (
+  return (
     <div className="flex flex-col min-h-screen font-vazirmatn">
       <Navbar />
 
@@ -102,7 +92,7 @@ return (
             {projects.map((project) => (
               <motion.div
                 key={project.id}
-                id={`project-${project.id}`} // اضافه شدن id برای لینک‌دهی مستقیم
+                id={`project-${project.id}`}
                 className="border rounded-xl shadow-lg bg-white overflow-hidden hover:shadow-xl transition-shadow duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -138,16 +128,16 @@ return (
                     >
                       <p className="text-gray-700 mb-6">{project.fullDesc}</p>
 
-                      {/* اسلایدر تصاویر با Thumbnail */}
+                      {/* اسلایدر تصاویر */}
                       <Swiper
-                        modules={[Autoplay, Pagination, Thumbs]}
+                        modules={[Autoplay, Pagination, Navigation]}
                         autoplay={{ delay: 3000 }}
                         pagination={{ clickable: true }}
+                        navigation={true}
                         loop
                         spaceBetween={10}
                         slidesPerView={1}
                         className="rounded-xl shadow-md mb-4"
-                        thumbs={{ swiper: thumbsSwiper }}
                       >
                         {project.images.map((src, i) => (
                           <SwiperSlide key={i}>
@@ -166,30 +156,6 @@ return (
                           </SwiperSlide>
                         ))}
                       </Swiper>
-
-                      {/* Thumbnail Slider */}
-                      <Swiper
-                        modules={[Thumbs, Autoplay]}
-                        onSwiper={setThumbsSwiper}
-                        spaceBetween={10}
-                        slidesPerView={4}
-                        watchSlidesProgress
-                        loop
-                        autoplay={{ delay: 3000, disableOnInteraction: false }}
-                        className="cursor-pointer"
-                      >
-                        {project.images.map((src, i) => (
-                          <SwiperSlide key={i}>
-                            <div className="w-full aspect-square flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden">
-                              <img
-                                src={src}
-                                alt={`${project.title} thumbnail`}
-                                className="w-full h-full object-contain"
-                              />
-                            </div>
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -201,7 +167,7 @@ return (
 
       <Footer />
 
-      {/* Modal تمام صفحه با اسلایدر کامل */}
+      {/* Modal تمام صفحه با اسلایدر */}
       <AnimatePresence>
         {fullscreenProject && (
           <motion.div
@@ -223,14 +189,13 @@ return (
               onClick={(e) => e.stopPropagation()}
             >
               <Swiper
-                modules={[Navigation, Pagination, Thumbs]}
+                modules={[Navigation, Pagination]}
                 navigation
                 pagination={{ clickable: true }}
                 loop
                 spaceBetween={10}
                 slidesPerView={1}
                 className="rounded-xl shadow-lg mb-4"
-                thumbs={{ swiper: fullscreenThumbs }}
                 initialSlide={fullscreenProject.startIndex ?? 0}
               >
                 {fullscreenProject.project.images.map((src: string, i: number) => (
@@ -245,28 +210,6 @@ return (
                   </SwiperSlide>
                 ))}
               </Swiper>
-
-              <Swiper
-                modules={[Thumbs]}
-                onSwiper={setFullscreenThumbs}
-                spaceBetween={10}
-                slidesPerView={6}
-                watchSlidesProgress
-                loop
-                className="cursor-pointer"
-              >
-                {fullscreenProject.project.images.map((src: string, i: number) => (
-                  <SwiperSlide key={i}>
-                    <div className="w-full aspect-square flex items-center justify-center bg-gray-800 rounded-lg overflow-hidden">
-                      <img
-                        src={src}
-                        alt={`${fullscreenProject.project.title} thumbnail`}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
             </div>
           </motion.div>
         )}
@@ -274,4 +217,3 @@ return (
     </div>
   );
 }
-

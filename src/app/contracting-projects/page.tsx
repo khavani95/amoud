@@ -2,18 +2,13 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Thumbs, Navigation } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/thumbs";
 import "swiper/css/navigation";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-/*
-  پروژه‌ها — لطفاً این آرایه را هر وقت خواستید با محتوا و تصاویر واقعی‌تان بروزرسانی کنید.
-  من هیچ‌یک از آیتم‌ها یا توضیحات را حذف نکردم — دقیقاً همان‌چیزی که فرستادید نگه داشته شده.
-*/
 const projects = [
   {
     id: 1,
@@ -30,7 +25,7 @@ const projects = [
     images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
   },
   {
-    id: 3,
+    id: 30,
     title: "پروژه مسکونی تهران",
     shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
     fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
@@ -40,42 +35,30 @@ const projects = [
 
 export default function ContractingProjects() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
   // برای modal: نگه داشتن پروژه‌ای که full-screen باز شده و index تصویر شروع
   const [fullscreenProject, setFullscreenProject] = useState<
     { project: typeof projects[0]; startIndex: number } | null
   >(null);
-  const [fullscreenThumbs, setFullscreenThumbs] = useState<any>(null);
 
   // باز و بسته کردن پروژه + ست کردن hash در URL
   const toggleProject = (id: number) => {
     setActiveProject((prev) => (prev === id ? null : id));
     if (activeProject === id) {
-      // اگر بستن شد → hash پاک میشه
       history.replaceState(null, "", window.location.pathname);
     } else {
-      // اگر باز شد → hash ست میشه
       window.location.hash = `project-${id}`;
     }
   };
 
   // وقتی صفحه لود شد، hash موجود رو بخونه و تب مربوطه رو باز کنه
   useEffect(() => {
-    const hash = window.location.hash; // مثل "#project-2"
+    const hash = window.location.hash;
     if (hash) {
       const match = hash.match(/project-(\d+)/);
       if (match) {
         const projectId = parseInt(match[1], 10);
         setActiveProject(projectId);
-
-        // اسکرول نرم به اون تب
-        const el = document.getElementById(`project-${projectId}`);
-        if (el) {
-          setTimeout(() => {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 300);
-        }
       }
     }
   }, []);
@@ -101,15 +84,14 @@ export default function ContractingProjects() {
             پروژه‌های پیمانکاری
           </h1>
           <p className="text-lg text-gray-500 text-center mb-12">
-          لیست پروژه‌های مسکونی، بیمارستانی، اداری، تجاری و... پیمانکاری (ابنیه ، برق و مکانیک)
+            لیست پروژه‌های مسکونی، اداری، تجاری و بیمارستانی
           </p>
-
           {/* لیست پروژه‌ها */}
           <div className="space-y-6">
             {projects.map((project) => (
               <motion.div
                 key={project.id}
-                id={`project-${project.id}`} // اضافه شدن id برای لینک‌دهی مستقیم
+                id={`project-${project.id}`}
                 className="border rounded-xl shadow-lg bg-white overflow-hidden hover:shadow-xl transition-shadow duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -145,16 +127,16 @@ export default function ContractingProjects() {
                     >
                       <p className="text-gray-700 mb-6">{project.fullDesc}</p>
 
-                      {/* اسلایدر تصاویر با Thumbnail */}
+                      {/* اسلایدر تصاویر */}
                       <Swiper
-                        modules={[Autoplay, Pagination, Thumbs]}
+                        modules={[Autoplay, Pagination, Navigation]}
                         autoplay={{ delay: 3000 }}
                         pagination={{ clickable: true }}
+                        navigation={true}
                         loop
                         spaceBetween={10}
                         slidesPerView={1}
                         className="rounded-xl shadow-md mb-4"
-                        thumbs={{ swiper: thumbsSwiper }}
                       >
                         {project.images.map((src, i) => (
                           <SwiperSlide key={i}>
@@ -173,30 +155,6 @@ export default function ContractingProjects() {
                           </SwiperSlide>
                         ))}
                       </Swiper>
-
-                      {/* Thumbnail Slider */}
-                      <Swiper
-                        modules={[Thumbs, Autoplay]}
-                        onSwiper={setThumbsSwiper}
-                        spaceBetween={10}
-                        slidesPerView={4}
-                        watchSlidesProgress
-                        loop
-                        autoplay={{ delay: 3000, disableOnInteraction: false }}
-                        className="cursor-pointer"
-                      >
-                        {project.images.map((src, i) => (
-                          <SwiperSlide key={i}>
-                            <div className="w-full aspect-square flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden">
-                              <img
-                                src={src}
-                                alt={`${project.title} thumbnail`}
-                                className="w-full h-full object-contain"
-                              />
-                            </div>
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -208,7 +166,7 @@ export default function ContractingProjects() {
 
       <Footer />
 
-      {/* Modal تمام صفحه با اسلایدر کامل */}
+      {/* Modal تمام صفحه با اسلایدر */}
       <AnimatePresence>
         {fullscreenProject && (
           <motion.div
@@ -230,14 +188,13 @@ export default function ContractingProjects() {
               onClick={(e) => e.stopPropagation()}
             >
               <Swiper
-                modules={[Navigation, Pagination, Thumbs]}
+                modules={[Navigation, Pagination]}
                 navigation
                 pagination={{ clickable: true }}
                 loop
                 spaceBetween={10}
                 slidesPerView={1}
                 className="rounded-xl shadow-lg mb-4"
-                thumbs={{ swiper: fullscreenThumbs }}
                 initialSlide={fullscreenProject.startIndex ?? 0}
               >
                 {fullscreenProject.project.images.map((src: string, i: number) => (
@@ -246,28 +203,6 @@ export default function ContractingProjects() {
                       <img
                         src={src}
                         alt={fullscreenProject.project.title}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-
-              <Swiper
-                modules={[Thumbs]}
-                onSwiper={setFullscreenThumbs}
-                spaceBetween={10}
-                slidesPerView={6}
-                watchSlidesProgress
-                loop
-                className="cursor-pointer"
-              >
-                {fullscreenProject.project.images.map((src: string, i: number) => (
-                  <SwiperSlide key={i}>
-                    <div className="w-full aspect-square flex items-center justify-center bg-gray-800 rounded-lg overflow-hidden">
-                      <img
-                        src={src}
-                        alt={`${fullscreenProject.project.title} thumbnail`}
                         className="w-full h-full object-contain"
                       />
                     </div>
