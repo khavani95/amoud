@@ -74,16 +74,6 @@ export default function ConstructionProjects() {
     }
   }, [fullscreenProject]);
 
-  // تنظیم اسکرول به تب فعال
-  useEffect(() => {
-    if (activeProject) {
-      const element = document.getElementById(`project-${activeProject}`);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    }
-  }, [activeProject]);
-
   return (
     <div className="flex flex-col min-h-screen font-vazirmatn">
       <Navbar />
