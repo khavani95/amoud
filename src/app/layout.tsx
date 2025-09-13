@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Vazirmatn } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/thumbs";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
