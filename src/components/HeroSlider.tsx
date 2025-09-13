@@ -50,7 +50,7 @@ export default function HeroSlider() {
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/80 to-transparent" />
 
       {/* توضیحات پروژه (سمت راست پایین) */}
-      <div className="absolute bottom-4 right-6 text-white max-w-md text-right">
+      <div className="absolute bottom-10 right-6 text-white max-w-md text-right">
         <h2 className="text-3xl font-bold">{projects[index].title}</h2>
         <p className="mt-1 text-base">{projects[index].desc}</p>
       </div>
