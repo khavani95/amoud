@@ -12,20 +12,20 @@ import { AnimatePresence, motion } from "framer-motion";
 const projects = [
   {
     id: 1,
-    title: "پروژه مسکونی تهران",
+    title: "پروژه مسکونی همت",
     shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
     fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
     images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
   },
   {
     id: 2,
-    title: "پروژه مسکونی تهران",
+    title: "پروژه مسکونی آسمان البرز",
     shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
     fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
     images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
   },
   {
-    id: 3,
+    id: 30,
     title: "پروژه مسکونی تهران",
     shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
     fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
@@ -62,23 +62,6 @@ export default function ConstructionProjects() {
       }
     }
   }, []);
- // وقتی activeProject تغییر کنه، روی اون تب اسکرول می‌کنیم
-useEffect(() => {
-  if (activeProject !== null && activeProject !== undefined) {
-    const el = document.getElementById(`project-${activeProject}`);
-    if (el) {
-      // کمی تأخیر برای رندر نرم‌تر
-      setTimeout(() => {
-        el.scrollIntoView({
-          behavior: "smooth",
-          block: "center",   // یا "nearest" بسته به سلیقه
-          inline: "center",  // اگه حالت افقی هم داشته باشه
-        });
-      }, 100);
-    }
-  }
-}, [activeProject]);
-
 
   // بستن modal با کلید ESC
   useEffect(() => {
@@ -98,12 +81,11 @@ useEffect(() => {
       <main className="flex-grow pt-20 bg-gradient-to-b from-gray-50 to-gray-100">
         <div className="container mx-auto px-6 py-12 max-w-4xl">
           <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">
-            پروژه‌های ساخت‌وساز
+            پروژه‌های پیمانکاری
           </h1>
           <p className="text-lg text-gray-500 text-center mb-12">
-            لیست پروژه‌های ساختمانی مسکونی (خرید یا مشارکت در ساخت)
+            لیست پروژه‌های مسکونی، اداری، تجاری و بیمارستانی
           </p>
-
           {/* لیست پروژه‌ها */}
           <div className="space-y-6">
             {projects.map((project) => (
