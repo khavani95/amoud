@@ -62,12 +62,19 @@ export default function ConstructionProjects() {
       }
     }
   }, []);
-  // وقتی activeProject تغییر کنه، روی اون تب اسکرول می‌کنیم
+ // وقتی activeProject تغییر کنه، روی اون تب اسکرول می‌کنیم
 useEffect(() => {
-  if (activeProject !== null) {
+  if (activeProject !== null && activeProject !== undefined) {
     const el = document.getElementById(`project-${activeProject}`);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      // کمی تأخیر برای رندر نرم‌تر
+      setTimeout(() => {
+        el.scrollIntoView({
+          behavior: "smooth",
+          block: "center",   // یا "nearest" بسته به سلیقه
+          inline: "center",  // اگه حالت افقی هم داشته باشه
+        });
+      }, 100);
     }
   }
 }, [activeProject]);
