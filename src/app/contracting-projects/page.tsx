@@ -6,7 +6,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const projects = [
@@ -33,14 +33,13 @@ const projects = [
   },
 ];
 
-export default function ConstructionProjects() {
+export default function ContractingProjects() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
-
   const [fullscreenProject, setFullscreenProject] = useState<
     { project: typeof projects[0]; startIndex: number } | null
   >(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // باز و بسته کردن پروژه + ست کردن hash در URL
   const toggleProject = (id: number) => {
     setActiveProject((prev) => (prev === id ? null : id));
     if (activeProject === id) {
@@ -50,7 +49,6 @@ export default function ConstructionProjects() {
     }
   };
 
-  // وقتی صفحه لود شد، hash موجود رو بخونه
   useEffect(() => {
     const hash = window.location.hash;
     if (hash) {
@@ -62,19 +60,6 @@ export default function ConstructionProjects() {
     }
   }, []);
 
-  // اسکرول خودکار به پروژه بازشده (سازگار با Chrome/Edge)
-  useEffect(() => {
-    if (activeProject !== null) {
-      requestAnimationFrame(() => {
-        const el = document.getElementById(`project-${activeProject}`);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
-        }
-      });
-    }
-  }, [activeProject]);
-
-  // بستن modal با ESC
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") setFullscreenProject(null);
@@ -85,12 +70,32 @@ export default function ConstructionProjects() {
     }
   }, [fullscreenProject]);
 
+  useEffect(() => {
+    if (activeProject !== null && containerRef.current) {
+      requestAnimationFrame(() => {
+        const el = document.getElementById(`project-${activeProject}`);
+        if (el) {
+          const isMobile = window.innerWidth <= 768; // تشخیص دستگاه موبایل
+          el.scrollIntoView({
+            behavior: "smooth",
+            block: isMobile ? "start" : "nearest",
+            inline: "nearest",
+          });
+          // تنظیم اسکرول برای جلوگیری از جابجایی ناخواسته
+          if (containerRef.current) {
+            containerRef.current.scrollTop = el.offsetTop - containerRef.current.offsetTop;
+          }
+        }
+      });
+    }
+  }, [activeProject]);
+
   return (
     <div className="flex flex-col min-h-screen font-vazirmatn">
       <Navbar />
 
       <main className="flex-grow pt-20 bg-gradient-to-b from-gray-50 to-gray-100">
-        <div className="container mx-auto px-6 py-12 max-w-4xl">
+        <div ref={containerRef} className="container mx-auto px-6 py-12 max-w-4xl">
           <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">
             پروژه‌های پیمانکاری
           </h1>
@@ -98,7 +103,6 @@ export default function ConstructionProjects() {
             لیست پروژه‌های مسکونی، اداری، تجاری و بیمارستانی
           </p>
 
-          {/* لیست پروژه‌ها */}
           <div className="space-y-6">
             {projects.map((project) => (
               <motion.div
@@ -109,7 +113,6 @@ export default function ConstructionProjects() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                {/* کارت اصلی */}
                 <button
                   onClick={() => toggleProject(project.id)}
                   className="w-full text-right px-6 py-5 flex justify-between items-center hover:bg-gray-50 transition-colors"
@@ -127,7 +130,6 @@ export default function ConstructionProjects() {
                   </motion.span>
                 </button>
 
-                {/* جزئیات بازشو */}
                 <AnimatePresence>
                   {activeProject === project.id && (
                     <motion.div
@@ -138,8 +140,6 @@ export default function ConstructionProjects() {
                       className="px-6 pb-6"
                     >
                       <p className="text-gray-700 mb-6">{project.fullDesc}</p>
-
-                      {/* اسلایدر تصاویر */}
                       <Swiper
                         modules={[Autoplay, Pagination, Navigation]}
                         autoplay={{ delay: 3000 }}
@@ -178,7 +178,6 @@ export default function ConstructionProjects() {
 
       <Footer />
 
-      {/* Modal تمام صفحه */}
       <AnimatePresence>
         {fullscreenProject && (
           <motion.div
@@ -194,7 +193,6 @@ export default function ConstructionProjects() {
             >
               ✕
             </button>
-
             <div
               className="w-full max-w-5xl"
               onClick={(e) => e.stopPropagation()}
