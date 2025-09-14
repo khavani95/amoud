@@ -62,6 +62,16 @@ export default function ConstructionProjects() {
       }
     }
   }, []);
+  // وقتی activeProject تغییر کنه، روی اون تب اسکرول می‌کنیم
+useEffect(() => {
+  if (activeProject !== null) {
+    const el = document.getElementById(`project-${activeProject}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+}, [activeProject]);
+
 
   // بستن modal با کلید ESC
   useEffect(() => {
