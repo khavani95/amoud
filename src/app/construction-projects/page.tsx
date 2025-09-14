@@ -36,7 +36,6 @@ const projects = [
 export default function ConstructionProjects() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
 
-  // برای modal: نگه داشتن پروژه‌ای که full-screen باز شده و index تصویر شروع
   const [fullscreenProject, setFullscreenProject] = useState<
     { project: typeof projects[0]; startIndex: number } | null
   >(null);
@@ -51,7 +50,7 @@ export default function ConstructionProjects() {
     }
   };
 
-  // وقتی صفحه لود شد، hash موجود رو بخونه و تب مربوطه رو باز کنه
+  // وقتی صفحه لود شد، hash موجود رو بخونه
   useEffect(() => {
     const hash = window.location.hash;
     if (hash) {
@@ -63,7 +62,19 @@ export default function ConstructionProjects() {
     }
   }, []);
 
-  // بستن modal با کلید ESC
+  // اسکرول خودکار به پروژه بازشده (سازگار با Chrome/Edge)
+  useEffect(() => {
+    if (activeProject !== null) {
+      requestAnimationFrame(() => {
+        const el = document.getElementById(`project-${activeProject}`);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+        }
+      });
+    }
+  }, [activeProject]);
+
+  // بستن modal با ESC
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") setFullscreenProject(null);
@@ -86,6 +97,7 @@ export default function ConstructionProjects() {
           <p className="text-lg text-gray-500 text-center mb-12">
             لیست پروژه‌های مسکونی، اداری، تجاری و بیمارستانی
           </p>
+
           {/* لیست پروژه‌ها */}
           <div className="space-y-6">
             {projects.map((project) => (
@@ -115,7 +127,7 @@ export default function ConstructionProjects() {
                   </motion.span>
                 </button>
 
-                {/* جزئیات بازشو با انیمیشن */}
+                {/* جزئیات بازشو */}
                 <AnimatePresence>
                   {activeProject === project.id && (
                     <motion.div
@@ -166,7 +178,7 @@ export default function ConstructionProjects() {
 
       <Footer />
 
-      {/* Modal تمام صفحه با اسلایدر */}
+      {/* Modal تمام صفحه */}
       <AnimatePresence>
         {fullscreenProject && (
           <motion.div
