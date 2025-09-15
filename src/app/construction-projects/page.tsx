@@ -30,18 +30,20 @@ export default function ConstrunctionProjects() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // گرفتن پروژه‌ها از API
-  useEffect(() => {
-    async function fetchProjects() {
-      try {
-        const res = await fetch("/api/construnction-projects");
-        const data: Project[] = await res.json();
-        setProjects(data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
+// گرفتن پروژه‌ها از API
+useEffect(() => {
+  async function fetchProjects() {
+    try {
+      const res = await fetch("/api/construction-projects");
+      const data = await res.json();
+      setProjects(data);
+    } catch (err) {
+      console.error("Error fetching projects:", err);
     }
-    fetchProjects();
-  }, []);
+  }
+  fetchProjects();
+}, []);
+
 
   const toggleProject = (id: number) => {
     setActiveProject((prev) => (prev === id ? null : id));
