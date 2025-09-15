@@ -19,6 +19,6 @@ export async function GET() {
 
     return NextResponse.json(data);
   } catch (err) {
-    return NextResponse.json({ error: "Failed to load data" }, { status: 500 });
+    return NextResponse.json({ err: "Failed to load data" }, { status: 500 });
   }
 }
