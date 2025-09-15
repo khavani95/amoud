@@ -8,29 +8,40 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+
+// تعریف تایپ برای پروژه‌ها
+interface Project {
+  id: number;
+  title: string;
+  shortDesc: string;
+  fullDesc: string;
+  images: string[];
+}
 
 export default function ConstructionProjects() {
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [activeProject, setActiveProject] = useState<number | null>(null);
-  const [fullscreenProject, setFullscreenProject] = useState<
-    { project: any; startIndex: number } | null
-  >(null);
+  const [fullscreenProject, setFullscreenProject] = useState<{
+    project: Project;
+    startIndex: number;
+  } | null>(null);
+
   const containerRef = useRef<HTMLDivElement>(null);
 
-
-// گرفتن پروژه‌ها از API
-useEffect(() => {
-  async function fetchProjects() {
-    try {
-      const res = await fetch("/api/construction-projects");
-      const data = await res.json();
-      setProjects(data);
-    } catch (err) {
-      console.error("Error fetching projects:", err);
+  // گرفتن پروژه‌ها از API
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        const res = await fetch("/api/construction-projects");
+        const data: Project[] = await res.json();
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
     }
-  }
-  fetchProjects();
-}, []);
+    fetchProjects();
+  }, []);
 
   const toggleProject = (id: number) => {
     setActiveProject((prev) => (prev === id ? null : id));
@@ -87,12 +98,15 @@ useEffect(() => {
       <Navbar />
 
       <main className="flex-grow pt-20 bg-gradient-to-b from-gray-50 to-gray-100">
-        <div ref={containerRef} className="container mx-auto px-6 py-12 max-w-4xl">
+        <div
+          ref={containerRef}
+          className="container mx-auto px-6 py-12 max-w-4xl"
+        >
           <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">
             پروژه‌های ساختمانی
           </h1>
           <p className="text-lg text-gray-500 text-center mb-12">
-          لیست پروژه های مشارکت درساخت یا خرید و مشارکت 
+            لیست پروژه‌های مشارکت در ساخت و خرید و مشارکت 
           </p>
 
           <div className="space-y-6">
@@ -110,7 +124,9 @@ useEffect(() => {
                   className="w-full text-right px-6 py-5 flex justify-between items-center hover:bg-gray-50 transition-colors"
                 >
                   <div>
-                    <h2 className="text-xl font-semibold text-gray-800">{project.title}</h2>
+                    <h2 className="text-xl font-semibold text-gray-800">
+                      {project.title}
+                    </h2>
                     <p className="text-gray-600">{project.shortDesc}</p>
                   </div>
                   <motion.span
@@ -142,7 +158,7 @@ useEffect(() => {
                         slidesPerView={1}
                         className="rounded-xl shadow-md mb-4"
                       >
-                        {project.images.map((src: string, i: number) => (
+                        {(project.images ?? []).map((src, i) => (
                           <SwiperSlide key={i}>
                             <div
                               className="w-full aspect-[16/9] flex items-center justify-center bg-gray-100 rounded-xl overflow-hidden cursor-pointer"
@@ -150,9 +166,11 @@ useEffect(() => {
                                 setFullscreenProject({ project, startIndex: i })
                               }
                             >
-                              <img
+                              <Image
                                 src={src}
                                 alt={project.title}
+                                width={1280}
+                                height={720}
                                 className="w-full h-full object-contain"
                               />
                             </div>
@@ -199,12 +217,14 @@ useEffect(() => {
                 className="rounded-xl shadow-lg mb-4"
                 initialSlide={fullscreenProject.startIndex ?? 0}
               >
-                {fullscreenProject.project.images.map((src: string, i: number) => (
+                {fullscreenProject.project.images.map((src, i) => (
                   <SwiperSlide key={i}>
                     <div className="w-full aspect-[16/9] flex items-center justify-center bg-gray-900 rounded-xl overflow-hidden">
-                      <img
+                      <Image
                         src={src}
                         alt={fullscreenProject.project.title}
+                        width={1280}
+                        height={720}
                         className="w-full h-full object-contain"
                       />
                     </div>
