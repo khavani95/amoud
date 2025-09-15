@@ -9,36 +9,28 @@ import "swiper/css/navigation";
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const projects = [
-  {
-    id: 1,
-    title: "پروژه مسکونی همت",
-    shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
-    fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
-    images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
-  },
-  {
-    id: 2,
-    title: "پروژه مسکونی آسمان البرز",
-    shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
-    fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
-    images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
-  },
-  {
-    id: 30,
-    title: "پروژه مسکونی تهران",
-    shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
-    fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
-    images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
-  },
-];
-
-export default function ContractingProjects() {
+export default function ConstructionProjects() {
+  const [projects, setProjects] = useState<any[]>([]);
   const [activeProject, setActiveProject] = useState<number | null>(null);
   const [fullscreenProject, setFullscreenProject] = useState<
-    { project: typeof projects[0]; startIndex: number } | null
+    { project: any; startIndex: number } | null
   >(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+
+// گرفتن پروژه‌ها از API
+useEffect(() => {
+  async function fetchProjects() {
+    try {
+      const res = await fetch("/api/contracting-projects");
+      const data = await res.json();
+      setProjects(data);
+    } catch (err) {
+      console.error("Error fetching projects:", err);
+    }
+  }
+  fetchProjects();
+}, []);
 
   const toggleProject = (id: number) => {
     setActiveProject((prev) => (prev === id ? null : id));
@@ -75,15 +67,15 @@ export default function ContractingProjects() {
       requestAnimationFrame(() => {
         const el = document.getElementById(`project-${activeProject}`);
         if (el) {
-          const isMobile = window.innerWidth <= 768; // تشخیص دستگاه موبایل
+          const isMobile = window.innerWidth <= 768;
           el.scrollIntoView({
             behavior: "smooth",
             block: isMobile ? "start" : "nearest",
             inline: "nearest",
           });
-          // تنظیم اسکرول برای جلوگیری از جابجایی ناخواسته
           if (containerRef.current) {
-            containerRef.current.scrollTop = el.offsetTop - containerRef.current.offsetTop;
+            containerRef.current.scrollTop =
+              el.offsetTop - containerRef.current.offsetTop;
           }
         }
       });
@@ -150,7 +142,7 @@ export default function ContractingProjects() {
                         slidesPerView={1}
                         className="rounded-xl shadow-md mb-4"
                       >
-                        {project.images.map((src, i) => (
+                        {project.images.map((src: string, i: number) => (
                           <SwiperSlide key={i}>
                             <div
                               className="w-full aspect-[16/9] flex items-center justify-center bg-gray-100 rounded-xl overflow-hidden cursor-pointer"

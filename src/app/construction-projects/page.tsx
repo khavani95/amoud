@@ -9,36 +9,28 @@ import "swiper/css/navigation";
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const projects = [
-  {
-    id: 1,
-    title: "پروژه مسکونی همت",
-    shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
-    fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
-    images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
-  },
-  {
-    id: 2,
-    title: "پروژه مسکونی آسمان البرز",
-    shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
-    fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
-    images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
-  },
-  {
-    id: 30,
-    title: "پروژه مسکونی تهران",
-    shortDesc: "ساختمان ۱۰ طبقه مسکونی در شمال تهران",
-    fullDesc: "این پروژه شامل ۱۰ طبقه مسکونی، پارکینگ، لابی و امکانات رفاهی کامل است...",
-    images: ["/projects/tehran1.jpg", "/projects/tehran2.jpg", "/projects/tehran3.jpg"],
-  },
-];
-
 export default function ConstructionProjects() {
+  const [projects, setProjects] = useState<any[]>([]);
   const [activeProject, setActiveProject] = useState<number | null>(null);
   const [fullscreenProject, setFullscreenProject] = useState<
-    { project: typeof projects[0]; startIndex: number } | null
+    { project: any; startIndex: number } | null
   >(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+
+// گرفتن پروژه‌ها از API
+useEffect(() => {
+  async function fetchProjects() {
+    try {
+      const res = await fetch("/api/construction-projects");
+      const data = await res.json();
+      setProjects(data);
+    } catch (err) {
+      console.error("Error fetching projects:", err);
+    }
+  }
+  fetchProjects();
+}, []);
 
   const toggleProject = (id: number) => {
     setActiveProject((prev) => (prev === id ? null : id));
@@ -75,15 +67,15 @@ export default function ConstructionProjects() {
       requestAnimationFrame(() => {
         const el = document.getElementById(`project-${activeProject}`);
         if (el) {
-          const isMobile = window.innerWidth <= 768; // تشخیص دستگاه موبایل
+          const isMobile = window.innerWidth <= 768;
           el.scrollIntoView({
             behavior: "smooth",
             block: isMobile ? "start" : "nearest",
             inline: "nearest",
           });
-          // تنظیم اسکرول برای جلوگیری از جابجایی ناخواسته
           if (containerRef.current) {
-            containerRef.current.scrollTop = el.offsetTop - containerRef.current.offsetTop;
+            containerRef.current.scrollTop =
+              el.offsetTop - containerRef.current.offsetTop;
           }
         }
       });
@@ -97,10 +89,10 @@ export default function ConstructionProjects() {
       <main className="flex-grow pt-20 bg-gradient-to-b from-gray-50 to-gray-100">
         <div ref={containerRef} className="container mx-auto px-6 py-12 max-w-4xl">
           <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">
-            پروژه‌های پیمانکاری
+            پروژه‌های ساختمانی
           </h1>
           <p className="text-lg text-gray-500 text-center mb-12">
-            لیست پروژه‌های مسکونی، اداری، تجاری و بیمارستانی
+          لیست پروژه های مشارکت درساخت یا خرید و مشارکت 
           </p>
 
           <div className="space-y-6">
@@ -150,7 +142,7 @@ export default function ConstructionProjects() {
                         slidesPerView={1}
                         className="rounded-xl shadow-md mb-4"
                       >
-                        {project.images.map((src, i) => (
+                        {project.images.map((src: string, i: number) => (
                           <SwiperSlide key={i}>
                             <div
                               className="w-full aspect-[16/9] flex items-center justify-center bg-gray-100 rounded-xl overflow-hidden cursor-pointer"
