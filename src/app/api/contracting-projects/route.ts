@@ -19,6 +19,7 @@ export async function GET() {
 
     return NextResponse.json(data);
   } catch (err) {
-    return NextResponse.json({ err: "Failed to load data" }, { status: 500 });
+    console.error(err);
+    return new Response("Internal Server Error", { status: 500 });
   }
 }
