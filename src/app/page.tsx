@@ -9,14 +9,11 @@ export default function Splash() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      // اول لوگو محو میشه
-      setShow(false);
-
-      // بعد از اتمام انیمیشن خروج میره به home
+      setShow(false); // لوگو محو میشه
       setTimeout(() => {
-        router.push("/home");
-      }, 700); // مدت fade-out
-    }, 2500); // مدت زمان نمایش لوگو
+        router.push("/home"); // بعد میره به home
+      }, 700);
+    }, 2500);
     return () => clearTimeout(timer);
   }, [router]);
 
@@ -29,15 +26,19 @@ export default function Splash() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
         >
-          <motion.img
-            src="/Amud.gif"
-            alt="لوگو آمود"
-            className="w-[550px] h-[550px]"
+          <motion.div
+            className="w-[80vw] max-w-[550px] aspect-square flex items-center justify-center"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 1, opacity: 0 }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
-          />
+          >
+            <img
+              src="/Amud.gif"
+              alt="لوگو آمود"
+              className="w-full h-full object-contain"
+            />
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
