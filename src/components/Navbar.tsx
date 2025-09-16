@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className="container mx-auto px-6 flex justify-between items-center h-20">
         {/* لوگو سمت راست */}
         <Link href="/" className="flex items-center order-2 ">
-          <img src="/logo.png" alt="آمودگسترآتیه" className="h-16 md:h-20" />
+          <img src="/logo.webp" alt="آمودگسترآتیه" className="h-16 md:h-20" />
         </Link>
 
         {/* منوی دسکتاپ */}
