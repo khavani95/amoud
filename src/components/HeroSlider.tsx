@@ -70,10 +70,14 @@ export default function HeroSlider() {
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/80 to-transparent" />
 
       {/* توضیحات پروژه */}
-      <div className="absolute bottom-10 right-6 text-white max-w-md text-right">
-        <h2 className="text-3xl font-bold">{projects[index].title}</h2>
-        <p className="mt-1 text-base">{projects[index].shortDesc}</p>
-      </div>
+     <div className="absolute bottom-6 right-4 text-white text-right">
+  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">
+    {projects[index].title}
+  </h2>
+  <p className="mt-1 text-xs sm:text-sm md:text-base lg:text-lg max-w-[200px] sm:max-w-[300px] md:max-w-md">
+    {projects[index].shortDesc}
+  </p>
+</div>
 
       {/* شمارنده */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
