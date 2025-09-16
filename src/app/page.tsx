@@ -34,7 +34,7 @@ export default function Splash() {
             transition={{ duration: 0.7, ease: "easeInOut" }}
           >
             <img
-              src="/Amud.gif"
+              src="/Amud.webm"
               alt="لوگو آمود"
               className="w-full h-full object-contain"
             />
