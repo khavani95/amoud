@@ -1,31 +1,51 @@
 "use client";
 import { useState, useEffect } from "react";
 
-const projects = [
-  {
-    title: "برج‌های مسکونی همت ۲",
-    desc: "پروژه تاسیسات الکتریکال در بلوار طبیعت",
-    img: "/projects/Yas-Residential-Towers.webp",
-    link: "/contracting-projects#project-1/",
-  },
-  {
-    title: "پروژه ۲۸۰۰ واحدی آسمان البرز",
-    desc: "بلوک‌های تیپ M و C",
-    img: "/projects/Aseman-alborz.jpg",
-    link: "/contracting-projects#project-2/",
-  },
-];
+// تعریف تایپ برای پروژه‌ها
+interface Project {
+  id: number;
+  title: string;
+  shortDesc: string;
+  link: string;
+  images: string; // اگر بعدا چندتا عکس باشه، اینو بذار string[]
+}
 
 export default function HeroSlider() {
   const [index, setIndex] = useState(0);
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  // گرفتن پروژه‌ها از API
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        const res = await fetch("/api/heroslider");
+        const data: Project[] = await res.json();
+        setProjects(data);
+      } catch (err) {
+        console.error("Error fetching projects:", err);
+      }
+    }
+    fetchProjects();
+  }, []);
 
   // اتوپلی
   useEffect(() => {
+    if (projects.length === 0) return;
+
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % projects.length);
     }, 5000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [projects]); // اینجا projects رو dependency گذاشتیم
+
+  if (projects.length === 0) {
+    return (
+      <div className="w-full aspect-[16/9] flex items-center justify-center bg-gray-200 text-gray-600">
+        در حال بارگذاری...
+      </div>
+    );
+  }
 
   return (
     <a
@@ -37,7 +57,7 @@ export default function HeroSlider() {
         {projects.map((project, i) => (
           <img
             key={i}
-            src={project.img}
+            src={project.images}
             alt={project.title}
             className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out ${
               i === index ? "opacity-100 scale-105" : "opacity-0 scale-100"
@@ -49,13 +69,13 @@ export default function HeroSlider() {
       {/* لایه گرادینت پایین */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/80 to-transparent" />
 
-      {/* توضیحات پروژه (سمت راست پایین) */}
+      {/* توضیحات پروژه */}
       <div className="absolute bottom-10 right-6 text-white max-w-md text-right">
         <h2 className="text-3xl font-bold">{projects[index].title}</h2>
-        <p className="mt-1 text-base">{projects[index].desc}</p>
+        <p className="mt-1 text-base">{projects[index].shortDesc}</p>
       </div>
 
-      {/* شمارنده دایره‌ای (وسط پایین) */}
+      {/* شمارنده */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
         {projects.map((_, i) => (
           <span
@@ -71,7 +91,7 @@ export default function HeroSlider() {
         ))}
       </div>
 
-      {/* متن جزئیات (پایین چپ - hover) */}
+      {/* متن جزئیات (hover) */}
       <div className="absolute bottom-4 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/50 px-3 py-1 rounded-lg text-sm">
         برای جزئیات بیشتر کلیک کنید
       </div>
