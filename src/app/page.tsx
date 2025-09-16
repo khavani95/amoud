@@ -33,9 +33,12 @@ export default function Splash() {
             exit={{ scale: 1, opacity: 0 }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
           >
-            <img
-              src="/Amud.gif"
-              alt="لوگو آمود"
+            <video
+              src="/Amud.webm"
+              autoPlay
+              loop
+              muted
+              playsInline
               className="w-full h-full object-contain"
             />
           </motion.div>
