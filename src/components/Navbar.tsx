@@ -43,6 +43,16 @@ export default function Navbar() {
 </ul>
 
           </li>
+          <li className="relative group">
+            <Link
+              href="/sale"
+              className="transition-all duration-300 group-hover:font-bold gray-hover:text-blue-600"
+            >
+              واحد فروش
+            </Link>
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gray-600 transition-all duration-300 group-hover:w-full"></span>
+          </li>
+
 
           <li className="relative group">
             <Link
@@ -97,6 +107,10 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
               >
                 پروژه‌های پیمانکاری
+              </Link>
+            </li>    <li>
+              <Link href="/sale" onClick={() => setIsOpen(false)}>
+              واحد فروش
               </Link>
             </li>
             <li>

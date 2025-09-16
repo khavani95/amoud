@@ -85,7 +85,7 @@ export default function HeroSlider() {
           <span
             key={i}
             className={`w-3 h-3 rounded-full cursor-pointer transition-all ${
-              i === index ? "bg-white scale-110" : "bg-white/50"
+              i === index ? "bg-white scale-110" : "bg-white/50 "
             }`}
             onClick={(e) => {
               e.preventDefault();
@@ -97,7 +97,9 @@ export default function HeroSlider() {
 
       {/* متن جزئیات (hover) */}
       <div className="absolute bottom-4 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/50 px-3 py-1 rounded-lg text-sm">
-        برای جزئیات بیشتر کلیک کنید
+         <p className="mt-1 text-xs sm:text-sm md:text-base lg:text-lg max-w-[200px] sm:max-w-[300px] md:max-w-md">
+برای جزئیات بیشتر کلیک کنید
+  </p> 
       </div>
 
       {/* دکمه قبلی */}
