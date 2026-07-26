@@ -1,130 +1,191 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
+import { ArrowLeft, ArrowDown } from "lucide-react";
 
-// تعریف تایپ برای پروژه‌ها
 interface Project {
   id: number;
   title: string;
   shortDesc: string;
   link: string;
-  images: string; // اگر بعدا چندتا عکس باشه، اینو بذار string[]
+  images: string; // comma-joined; first used
 }
+
+const FALLBACK: Project[] = [
+  {
+    id: 1,
+    title: "برج‌های مسکونی یاس همت",
+    shortDesc: "پروژه شاخص مسکونی",
+    link: "/contracting-projects#project-1",
+    images: "/projects/Yas-Residential-Towers.webp",
+  },
+  {
+    id: 2,
+    title: "شهرک ۲۸۰۰ واحدی آسمان البرز",
+    shortDesc: "اجرای تأسیسات الکتریکال و مکانیکال",
+    link: "/contracting-projects#project-2",
+    images: "/projects/Aseman-alborz.jpg",
+  },
+];
 
 export default function HeroSlider() {
   const [index, setIndex] = useState(0);
   const [projects, setProjects] = useState<Project[]>([]);
 
-  // گرفتن پروژه‌ها از API
   useEffect(() => {
-    async function fetchProjects() {
+    let alive = true;
+    (async () => {
       try {
         const res = await fetch("/api/heroslider");
         const data: Project[] = await res.json();
-        setProjects(data);
-      } catch (err) {
-        console.error("Error fetching projects:", err);
+        if (alive && Array.isArray(data) && data.length) setProjects(data);
+        else if (alive) setProjects(FALLBACK);
+      } catch {
+        if (alive) setProjects(FALLBACK);
       }
-    }
-    fetchProjects();
+    })();
+    return () => {
+      alive = false;
+    };
   }, []);
 
-  // اتوپلی
+  const list = projects.length ? projects : FALLBACK;
+
   useEffect(() => {
-    if (projects.length === 0) return;
-
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % projects.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [projects]); // اینجا projects رو dependency گذاشتیم
-
-  if (projects.length === 0) {
-    return (
-      <div className="w-full aspect-[16/9] flex items-center justify-center bg-gray-200 text-gray-600">
-        در حال بارگذاری...
-      </div>
+    if (list.length < 2) return;
+    const t = setInterval(
+      () => setIndex((p) => (p + 1) % list.length),
+      6000
     );
-  }
+    return () => clearInterval(t);
+  }, [list.length]);
+
+  const imgOf = useCallback((p: Project) => {
+    if (!p?.images) return "";
+    return typeof p.images === "string"
+      ? p.images.split(",")[0].trim()
+      : (p.images as unknown as string[])[0];
+  }, []);
+
+  const active = list[index];
 
   return (
-    <a
-      href={projects[index].link}
-      className="relative block w-full aspect-[16/9] overflow-hidden group"
-    >
-      {/* تصاویر با موشن */}
-      <div className="w-full aspect-[16/9] relative">
-        {projects.map((project, i) => (
+    <section className="relative min-h-[100svh] w-full overflow-hidden bg-[var(--bg)]">
+      {/* Background slides */}
+      <div className="absolute inset-0">
+        {list.map((p, i) => (
           <img
-            key={i}
-            src={project.images}
-            alt={project.title}
-            className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out ${
-              i === index ? "opacity-100 scale-105" : "opacity-0 scale-100"
+            key={p.id ?? i}
+            src={imgOf(p)}
+            alt={p.title}
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1600ms] ease-out ${
+              i === index
+                ? "opacity-100 scale-105"
+                : "opacity-0 scale-100"
             }`}
           />
         ))}
+        {/* Cinematic overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/70 to-[var(--bg)]/40" />
+        <div className="absolute inset-0 bg-gradient-to-l from-[var(--bg)]/90 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-grid opacity-40" />
       </div>
 
-      {/* لایه گرادینت پایین */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/80 to-transparent" />
-
-      {/* توضیحات پروژه */}
-     <div className="absolute bottom-6 right-4 text-white text-right">
-  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">
-    {projects[index].title}
-  </h2>
-  <p className="mt-1 text-xs sm:text-sm md:text-base lg:text-lg max-w-[200px] sm:max-w-[300px] md:max-w-md">
-    {projects[index].shortDesc}
-  </p>
-</div>
-
-      {/* شمارنده */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-        {projects.map((_, i) => (
+      {/* Content */}
+      <div className="relative z-10 amoud-container flex min-h-[100svh] flex-col justify-center pt-28 pb-20">
+        <div className="max-w-3xl">
           <span
-            key={i}
-            className={`w-3 h-3 rounded-full cursor-pointer transition-all ${
-              i === index ? "bg-white scale-110" : "bg-white/50 "
-            }`}
-            onClick={(e) => {
-              e.preventDefault();
-              setIndex(i);
-            }}
-          />
-        ))}
+            className="eyebrow mb-6 opacity-0 animate-[fadeUp_.7s_ease_forwards]"
+            style={{ animationDelay: "0.1s" }}
+          >
+            آمود گستر آتیه · از سال ۱۳۸۰
+          </span>
+
+          <h1
+            className="text-4xl sm:text-6xl lg:text-7xl font-black leading-[1.15] text-[var(--ink)] opacity-0 animate-[fadeUp_.7s_ease_forwards]"
+            style={{ animationDelay: "0.25s" }}
+          >
+            ساختِ آینده،
+            <br />
+            بر پایهٔ{" "}
+            <span className="text-gradient-gold">اعتماد و تخصص</span>
+          </h1>
+
+          <p
+            className="mt-6 max-w-xl text-base sm:text-lg leading-8 text-[var(--ink-soft)] opacity-0 animate-[fadeUp_.7s_ease_forwards]"
+            style={{ animationDelay: "0.4s" }}
+          >
+            مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی با تمرکز
+            تخصصی بر تأسیسات برق و مکانیک — بیش از دو دهه تجربه در ساخت.
+          </p>
+
+          <div
+            className="mt-9 flex flex-wrap items-center gap-4 opacity-0 animate-[fadeUp_.7s_ease_forwards]"
+            style={{ animationDelay: "0.55s" }}
+          >
+            <Link href="/contracting-projects" className="btn btn-gold">
+              مشاهدهٔ پروژه‌ها
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+            <Link href="/contact" className="btn btn-ghost">
+              تماس با ما
+            </Link>
+          </div>
+        </div>
+
+        {/* Active project label + dots */}
+        <div className="mt-16 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <Link
+            href={active?.link || "#"}
+            className="group max-w-md"
+            key={active?.id}
+          >
+            <div className="text-xs font-bold uppercase tracking-widest text-[var(--gold)] mb-2">
+              پروژهٔ شاخص
+            </div>
+            <div className="text-lg font-bold text-[var(--ink)] group-hover:text-[var(--gold)] transition-colors">
+              {active?.title}
+            </div>
+            <div className="text-sm text-[var(--ink-muted)]">
+              {active?.shortDesc}
+            </div>
+          </Link>
+
+          <div className="flex items-center gap-3">
+            {list.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`اسلاید ${i + 1}`}
+                onClick={() => setIndex(i)}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === index
+                    ? "w-10 bg-[var(--gold)]"
+                    : "w-4 bg-white/25 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* متن جزئیات (hover) */}
-      <div className="absolute bottom-4 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black/50 px-3 py-1 rounded-lg text-sm">
-         <p className="mt-1 text-xs sm:text-sm md:text-base lg:text-lg max-w-[200px] sm:max-w-[300px] md:max-w-md">
-برای جزئیات بیشتر کلیک کنید
-  </p> 
+      {/* Scroll cue */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-2 text-[var(--ink-muted)]">
+        <span className="text-[11px] tracking-widest">اسکرول کنید</span>
+        <ArrowDown className="w-4 h-4 animate-bounce" />
       </div>
 
-      {/* دکمه قبلی */}
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          setIndex((index - 1 + projects.length) % projects.length);
-        }}
-        className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white text-4xl px-4 py-2 rounded-full"
-      >
-        ‹
-      </button>
-
-      {/* دکمه بعدی */}
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          setIndex((index + 1) % projects.length);
-        }}
-        className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white text-4xl px-4 py-2 rounded-full"
-      >
-        ›
-      </button>
-    </a>
+      <style jsx>{`
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(24px);
+          }
+          to {
+            opacity: 1;
+            transform: none;
+          }
+        }
+      `}</style>
+    </section>
   );
 }

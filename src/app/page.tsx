@@ -21,7 +21,7 @@ export default function Splash() {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="flex items-center justify-center h-screen bg-white"
+          className="flex items-center justify-center h-screen bg-[#0a0a0c]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
@@ -33,6 +33,9 @@ export default function Splash() {
             exit={{ scale: 1, opacity: 0 }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
           >
+            {/* The brand animation is dark-on-white artwork: invert it so the
+                mark reads light, then feather the edges so the video's
+                rectangle dissolves into the dark page. */}
             <video
               src="/Amud.webm"
               autoPlay
@@ -40,6 +43,13 @@ export default function Splash() {
               muted
               playsInline
               className="w-full h-full object-contain"
+              style={{
+                filter: "invert(1)",
+                WebkitMaskImage:
+                  "radial-gradient(circle at center, #000 42%, transparent 70%)",
+                maskImage:
+                  "radial-gradient(circle at center, #000 42%, transparent 70%)",
+              }}
             />
           </motion.div>
         </motion.div>
