@@ -15,18 +15,31 @@ const vazir = Vazirmatn({
 });
 
 export const metadata: Metadata = {
-  title: "Amoud",
-  description: "شرکت آمودگسترآتیه",
+  metadataBase: new URL("https://amoud-co.ir"),
+  title: {
+    default: "آمود گستر آتیه | ساخت‌وساز، پیمانکاری و تأسیسات",
+    template: "%s | آمود گستر آتیه",
+  },
+  description:
+    "مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی با تمرکز تخصصی بر تأسیسات برق و مکانیک — از سال ۱۳۸۰.",
+  keywords: [
+    "آمود گستر آتیه",
+    "پیمانکاری ساختمان",
+    "تأسیسات الکتریکال",
+    "تأسیسات مکانیکال",
+    "مشارکت در ساخت",
+  ],
   icons: {
     icon: "/logo192.webp",
     shortcut: "/logo192.webp",
     apple: "/logo192.webp",
   },
   openGraph: {
-    title: "Amoud",
-    description: "شرکت آمودگسترآتیه",
+    title: "آمود گستر آتیه | ساخت‌وساز، پیمانکاری و تأسیسات",
+    description:
+      "مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی با تمرکز تخصصی بر تأسیسات برق و مکانیک — از سال ۱۳۸۰.",
     url: "https://amoud-co.ir",
-    siteName: "Amoud",
+    siteName: "آمود گستر آتیه",
     images: [
       {
         url: "/logo192.webp",
@@ -50,7 +63,7 @@ export default function RootLayout({
         <link rel="icon" type="image/webp" sizes="32x32" href="/favicon-32x32.webp" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.webp" />
       </head>
-      <body className="font-vazir bg-gray-50">
+      <body className="font-vazir bg-[#0a0a0c]">
         <PageTransition>{children}</PageTransition>
         <SpeedInsights />
         

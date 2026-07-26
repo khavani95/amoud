@@ -1,38 +1,264 @@
 @import "tailwindcss";
 
-/* فعال‌سازی لایه‌های اصلی Tailwind */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ================================================================
+   AMOUD — Dark Premium Design System
+   آمود گستر آتیه | dark editorial · gold accent · Persian RTL
+   ================================================================ */
+
+@font-face {
+  font-family: "Arquitectura";
+  src: url("/fonts/Arquitectura.ttf") format("truetype");
+  font-weight: 400 700;
+  font-display: swap;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base surfaces (near-black, warm) */
+  --bg: #0a0a0c;
+  --bg-2: #101014;
+  --surface: #16161c;
+  --surface-2: #1c1c24;
+  --elevated: #22222b;
+
+  /* Gold accent */
+  --gold: #c9a24b;
+  --gold-soft: #dab863;
+  --gold-deep: #a07d2c;
+  --gold-glow: rgba(201, 162, 75, 0.16);
+
+  /* Text */
+  --ink: #f6f4ee;
+  --ink-soft: #cbc7bd;
+  --ink-muted: #8c887f;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.14);
+
   --font-vazir: "Vazirmatn", sans-serif;
-}
-.font-vazir {
-  font-family: var(--font-vazir);
-}
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --shadow-lg: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+  --maxw: 1200px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* keep utility used across pages */
+.font-vazir,
+.font-vazirmatn {
+  font-family: var(--font-vazir);
+}
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-vazir);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
-html {
-  direction: rtl;
-  font-family: 'Vazirmatn', sans-serif; /* یا وزیر */
+
+/* Kill the old light default that layout.tsx / pages request */
+body.bg-gray-50 {
+  background: var(--bg) !important;
+}
+
+::selection {
+  background: var(--gold);
+  color: #10100b;
+}
+
+/* Refined scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a33;
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-deep);
+}
+
+/* Component classes live in the `components` layer so Tailwind utilities
+   (hidden, flex, !py-*, …) always win over them. */
+@layer components {
+/* ---------------- Layout helpers ---------------- */
+.amoud-container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+.display-en {
+  font-family: "Arquitectura", var(--font-vazir);
+  letter-spacing: 0.12em;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hairline gold divider */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ---------------- Buttons ---------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease,
+    color 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+}
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+  color: #14110a;
+  box-shadow: 0 10px 30px -10px var(--gold-glow);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px -10px rgba(201, 162, 75, 0.5);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+}
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* ---------------- Cards ---------------- */
+.card {
+  background: linear-gradient(180deg, var(--surface), var(--bg-2));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201, 162, 75, 0.4);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Subtle noise/vignette background layer */
+.bg-grid {
+  background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 0
+    );
+  background-size: 42px 42px;
+}
+
+/* Brand mark is near-black artwork — render it light on dark surfaces */
+.logo-invert {
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+} /* end @layer components */
+
+/* ---------------- Scroll reveal ---------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------------- Swiper theming ---------------- */
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--gold) !important;
+}
+.swiper-pagination-bullet {
+  background: var(--ink-muted) !important;
+  opacity: 1 !important;
+}
+.swiper-pagination-bullet-active {
+  background: var(--gold) !important;
+  width: 22px !important;
+  border-radius: 999px !important;
+}
+
+/* Marquee — the track is forced to LTR so the -50% loop is seamless
+   regardless of the page's RTL direction. */
+@keyframes amoud-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  direction: ltr;
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: amoud-marquee 32s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
 }
