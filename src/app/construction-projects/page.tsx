@@ -1,30 +1,21 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Reveal from "@/components/Reveal";
+import PageHeader from "@/components/PageHeader";
+import SectionHead from "@/components/SectionHead";
 import ProjectAccordion from "@/components/ProjectAccordion";
 
-export default function ConstructionProjects() {
+export default function Page() {
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--bg)]">
+    <div className="flex min-h-screen flex-col">
       <Navbar />
       <main className="flex-grow">
-        <section className="relative pt-36 pb-14 bg-grid border-b border-[var(--line)]">
-          <div className="amoud-container text-center">
-            <Reveal>
-              <span className="eyebrow justify-center mb-5">نمونه کارها</span>
-              <h1 className="text-4xl sm:text-5xl font-black text-[var(--ink)]">
-                پروژه‌های <span className="text-gradient-gold">ساخت‌وساز</span>
-              </h1>
-              <p className="mx-auto mt-5 max-w-2xl leading-8 text-[var(--ink-muted)]">
-                فهرست پروژه‌های مشارکت در ساخت، خرید و مشارکت
-              </p>
-            </Reveal>
-          </div>
-        </section>
-
+        <PageHeader title="پروژه‌های ساخت‌وساز" subtitle="فهرست پروژه‌های مشارکت در ساخت، خرید و مشارکت." />
         <section className="amoud-container max-w-4xl py-14">
-          <ProjectAccordion endpoint="/api/construction-projects" />
+          <SectionHead title="پروژه‌های ساخت‌وساز" index="۰۸" />
+          <div className="mt-8">
+            <ProjectAccordion endpoint="/api/construction-projects" />
+          </div>
         </section>
       </main>
       <Footer />

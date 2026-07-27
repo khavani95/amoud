@@ -1,68 +1,54 @@
 "use client";
+import { Phone } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import PageHeader from "@/components/PageHeader";
+import SectionHead from "@/components/SectionHead";
 import ProjectAccordion from "@/components/ProjectAccordion";
-import { Phone } from "lucide-react";
 
 const contacts = [
-  { name: "مهندس خوانی", phone: "09123505524", href: "tel:+989123505524" },
-  { name: "مهندس مؤمن", phone: "09125458578", href: "tel:+989125458578" },
+  { name: "مهندس خوانی", phone: "۰۹۱۲۳۵۰۵۵۲۴", href: "tel:+989123505524" },
+  { name: "مهندس مؤمن", phone: "۰۹۱۲۵۴۵۸۵۷۸", href: "tel:+989125458578" },
 ];
 
 export default function Sale() {
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--bg)]">
+    <div className="flex min-h-screen flex-col">
       <Navbar />
       <main className="flex-grow">
-        <section className="relative pt-36 pb-14 bg-grid border-b border-[var(--line)]">
-          <div className="amoud-container text-center">
-            <Reveal>
-              <span className="eyebrow justify-center mb-5">فروش و مشاوره</span>
-              <h1 className="text-4xl sm:text-5xl font-black text-[var(--ink)]">
-                واحد <span className="text-gradient-gold">فروش</span>
-              </h1>
-              <p className="mx-auto mt-5 max-w-2xl leading-8 text-[var(--ink-muted)]">
-                جهت کسب اطلاعات بیشتر و اطلاع از شرایط فروش، با شماره‌های زیر
-                تماس حاصل فرمایید.
-              </p>
-            </Reveal>
+        <PageHeader
+          title="واحد فروش"
+          subtitle="جهت کسب اطلاعات بیشتر و اطلاع از شرایط فروش، با شماره‌های زیر تماس حاصل فرمایید."
+        />
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              {contacts.map((c, i) => (
-                <Reveal key={c.phone} delay={i * 90}>
-                  <a
-                    href={c.href}
-                    className="card flex items-center gap-4 px-7 py-5"
-                  >
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--gold-glow)] text-[var(--gold)]">
-                      <Phone className="h-5 w-5" />
+        <section className="amoud-container py-14">
+          <div className="grid gap-5 sm:grid-cols-2">
+            {contacts.map((c, i) => (
+              <Reveal key={c.href} delay={i * 80}>
+                <a href={c.href} className="card flex items-center gap-5 p-6">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-[var(--border-strong)] text-[var(--copper)]">
+                    <Phone className="h-5 w-5" strokeWidth={1.7} />
+                  </span>
+                  <span>
+                    <span className="block text-[12.5px] text-[var(--text-muted)]">
+                      {c.name}
                     </span>
-                    <span className="text-right">
-                      <span className="block text-sm text-[var(--ink-muted)]">
-                        {c.name}
-                      </span>
-                      <span
-                        className="block text-lg font-bold text-[var(--ink)]"
-                        dir="ltr"
-                      >
-                        {c.phone}
-                      </span>
+                    <span className="mt-0.5 block text-[16px] font-bold text-white">
+                      {c.phone}
                     </span>
-                  </a>
-                </Reveal>
-              ))}
+                  </span>
+                </a>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-12">
+            <SectionHead title="واحدهای موجود" />
+            <div className="mt-8 max-w-4xl">
+              <ProjectAccordion endpoint="/api/sale" />
             </div>
           </div>
-        </section>
-
-        <section className="amoud-container max-w-4xl py-14">
-          <Reveal className="mb-8 text-center">
-            <h2 className="text-2xl font-bold text-[var(--ink)]">
-              واحدهای موجود
-            </h2>
-          </Reveal>
-          <ProjectAccordion endpoint="/api/sale" />
         </section>
       </main>
       <Footer />

@@ -1,74 +1,55 @@
 "use client";
 import Link from "next/link";
-import { MapPin, Phone, Mail, Smartphone, ArrowUp } from "lucide-react";
+import { company, contact } from "@/data/company";
 
+/**
+ * Per the handoff: a copper 2px top rule, then three parts —
+ * phone (white) / company name (muted) / site (copper).
+ */
 export default function Footer() {
   return (
-    <footer className="relative mt-24 border-t border-[var(--line)] bg-[#08080a]">
-      <div className="gold-rule opacity-60" />
-      <div className="amoud-container py-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="mt-20 border-t-2 border-[var(--copper)] bg-[var(--navy)]">
+      <div className="amoud-container py-10">
+        <div className="grid gap-10 md:grid-cols-3">
           {/* Brand */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-5">
+          <div>
+            <div className="flex items-center gap-3">
               <img
-                src="/logo.webp"
-                alt="آمود گستر آتیه"
-                className="logo-invert h-14 w-auto"
+                src="/brand/logo.png"
+                alt={company.nameFa}
+                className="logo-white h-12 w-auto"
               />
-              <div className="text-base font-bold text-[var(--ink)]">
-                آمود گستر آتیه
+              <div className="leading-tight">
+                <div className="text-[15px] font-extrabold text-white">
+                  {company.nameFa}
+                </div>
+                <div className="text-[11px] tracking-[1px] text-[var(--text-muted)]">
+                  {company.nameEn}
+                </div>
               </div>
             </div>
-            <p className="text-sm leading-7 text-[var(--ink-muted)] max-w-xs">
-              مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی؛
-              متخصص تأسیسات برق و مکانیک از سال ۱۳۸۰.
+            <p className="mt-5 max-w-xs text-[13.5px] leading-8 text-[var(--text-muted)]">
+              {company.tagline} — از سال ۱۳۸۰
             </p>
           </div>
 
-          {/* Quick links */}
+          {/* Sitemap */}
           <div>
-            <h4 className="text-sm font-bold text-[var(--ink)] mb-5">
+            <h4 className="mb-4 flex items-center gap-3 text-[15px] font-extrabold text-white">
+              <span className="bullet-sm" />
               دسترسی سریع
             </h4>
-            <ul className="space-y-3 text-sm">
+            <ul className="grid grid-cols-2 gap-y-3 text-[13.5px]">
               {[
                 { href: "/home", label: "خانه" },
                 { href: "/about", label: "درباره ما" },
+                { href: "/services", label: "خدمات" },
+                { href: "/projects", label: "پروژه‌های شاخص" },
                 { href: "/sale", label: "واحد فروش" },
                 { href: "/contact", label: "تماس با ما" },
               ].map((l) => (
                 <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="text-[var(--ink-muted)] hover:text-[var(--gold)] transition-colors"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Projects */}
-          <div>
-            <h4 className="text-sm font-bold text-[var(--ink)] mb-5">پروژه‌ها</h4>
-            <ul className="space-y-3 text-sm">
-              {[
-                {
-                  href: "/construction-projects",
-                  label: "پروژه‌های ساخت‌وساز",
-                },
-                {
-                  href: "/contracting-projects",
-                  label: "پروژه‌های پیمانکاری",
-                },
-              ].map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="text-[var(--ink-muted)] hover:text-[var(--gold)] transition-colors"
-                  >
+                  <Link href={l.href} className="link-copper">
                     {l.label}
                   </Link>
                 </li>
@@ -78,32 +59,31 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm font-bold text-[var(--ink)] mb-5">
-              ارتباط با ما
+            <h4 className="mb-4 flex items-center gap-3 text-[15px] font-extrabold text-white">
+              <span className="bullet-sm" />
+              تماس با ما
             </h4>
-            <ul className="space-y-4 text-sm text-[var(--ink-muted)]">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-[var(--gold)] mt-1 shrink-0" />
-                <span className="leading-6">
-                  تهران، شهرک گلستان، بلوار امیرکبیر، بلوار هاشم‌زاده، رز ۲
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-[var(--gold)] shrink-0" />
-                <a href="tel:+982144711222" dir="ltr">
-                  021-44711222
+            <ul className="space-y-3 text-[13.5px] leading-7 text-[var(--text-secondary)]">
+              <li>
+                {contact.office.label}:{" "}
+                <a href={contact.office.href} className="link-copper">
+                  {contact.office.value}
                 </a>
               </li>
-              <li className="flex items-center gap-3">
-                <Smartphone className="w-4 h-4 text-[var(--gold)] shrink-0" />
-                <a href="tel:+989123505524" dir="ltr">
-                  +98 912 350 5524
+              <li>
+                {contact.ceo.label}:{" "}
+                <a href={contact.ceo.href} className="link-copper">
+                  {contact.ceo.value}
                 </a>
               </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-[var(--gold)] shrink-0" />
-                <a href="mailto:AmudGostar.Co@Gmail.com" dir="ltr">
-                  AmudGostar.Co@Gmail.com
+              <li className="text-[var(--text-muted)]">{contact.address}</li>
+              <li>
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="link-copper"
+                  dir="ltr"
+                >
+                  {contact.email}
                 </a>
               </li>
             </ul>
@@ -111,21 +91,19 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-[var(--line)]">
-        <div className="amoud-container py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[var(--ink-muted)]">
-            © {new Date().getFullYear()} آمود گستر آتیه — تمامی حقوق محفوظ است.
-          </p>
-          <button
-            onClick={() =>
-              window.scrollTo({ top: 0, behavior: "smooth" })
-            }
-            className="inline-flex items-center gap-2 text-xs text-[var(--ink-muted)] hover:text-[var(--gold)] transition-colors"
+      {/* Bottom rule: phone / name / site */}
+      <div className="border-t border-[var(--border-soft)]">
+        <div className="amoud-container flex flex-col items-center justify-between gap-2 py-4 text-[12.5px] sm:flex-row">
+          <a
+            href={contact.office.href}
+            className="font-semibold text-white"
           >
-            بازگشت به بالا
-            <ArrowUp className="w-4 h-4" />
-          </button>
+            {contact.office.value}
+          </a>
+          <span className="text-[var(--text-muted)]">{company.nameFa}</span>
+          <span className="font-semibold text-[var(--copper)]">
+            {contact.site}
+          </span>
         </div>
       </div>
     </footer>

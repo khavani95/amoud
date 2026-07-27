@@ -17,32 +17,33 @@ const vazir = Vazirmatn({
 export const metadata: Metadata = {
   metadataBase: new URL("https://amoud-co.ir"),
   title: {
-    default: "آمود گستر آتیه | ساخت‌وساز، پیمانکاری و تأسیسات",
+    default: "آمود گستر آتیه | مجری تخصصی تاسیسات الکتریکال و مکانیکال",
     template: "%s | آمود گستر آتیه",
   },
   description:
-    "مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی با تمرکز تخصصی بر تأسیسات برق و مکانیک — از سال ۱۳۸۰.",
+    "شرکت آمود گستر آتیه از سال ۱۳۸۰ مجری اجرای دستمزدی عملیات تاسیسات الکتریکال و مکانیکال پروژه‌های مسکونی، اداری، تجاری، بیمارستانی و برج‌های بلندمرتبه است.",
   keywords: [
     "آمود گستر آتیه",
-    "پیمانکاری ساختمان",
+    "اجرای دستمزدی تاسیسات",
+    "پیمانکاری تاسیسات",
     "تأسیسات الکتریکال",
     "تأسیسات مکانیکال",
     "مشارکت در ساخت",
   ],
   icons: {
-    icon: "/logo192.webp",
-    shortcut: "/logo192.webp",
-    apple: "/logo192.webp",
+    icon: "/brand/logo.png",
+    shortcut: "/brand/logo.png",
+    apple: "/brand/logo.png",
   },
   openGraph: {
-    title: "آمود گستر آتیه | ساخت‌وساز، پیمانکاری و تأسیسات",
+    title: "آمود گستر آتیه | مجری تخصصی تاسیسات الکتریکال و مکانیکال",
     description:
-      "مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی با تمرکز تخصصی بر تأسیسات برق و مکانیک — از سال ۱۳۸۰.",
+      "شرکت آمود گستر آتیه از سال ۱۳۸۰ مجری اجرای دستمزدی عملیات تاسیسات الکتریکال و مکانیکال پروژه‌های مسکونی، اداری، تجاری، بیمارستانی و برج‌های بلندمرتبه است.",
     url: "https://amoud-co.ir",
     siteName: "آمود گستر آتیه",
     images: [
       {
-        url: "/logo192.webp",
+        url: "/brand/logo.png",
         width: 600,
         height: 600,
         alt: "لوگو آمود",
@@ -63,7 +64,7 @@ export default function RootLayout({
         <link rel="icon" type="image/webp" sizes="32x32" href="/favicon-32x32.webp" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.webp" />
       </head>
-      <body className="font-vazir bg-[#0a0a0c]">
+      <body className="font-vazir">
         <PageTransition>{children}</PageTransition>
         <SpeedInsights />
         
