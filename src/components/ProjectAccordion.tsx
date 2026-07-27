@@ -29,9 +29,9 @@ function useBrokenImages() {
 
 function ImagePlaceholder({ title }: { title: string }) {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[var(--navy-deep)] text-center">
-      <img src="/brand/logo.png" alt="" className="logo-white h-14 w-auto opacity-40" />
-      <span className="px-6 text-sm text-[var(--text-muted)]">{title}</span>
+    <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#0d0d10] text-center">
+      <img src="/brand/logo.png" alt="" className="logo-invert h-14 w-auto opacity-40" />
+      <span className="px-6 text-sm text-[var(--ink-muted)]">{title}</span>
     </div>
   );
 }
@@ -110,7 +110,7 @@ export default function ProjectAccordion({ endpoint }: { endpoint: string }) {
         {[...Array(3)].map((_, i) => (
           <div
             key={i}
-            className="h-24 animate-pulse border border-[var(--border-card)] bg-[var(--surface-card)]"
+            className="h-24 animate-pulse rounded-2xl border border-[var(--line)] bg-[var(--surface)]"
           />
         ))}
       </div>
@@ -119,7 +119,7 @@ export default function ProjectAccordion({ endpoint }: { endpoint: string }) {
 
   if (!projects.length) {
     return (
-      <p className="py-12 text-center text-[var(--text-muted)]">
+      <p className="py-12 text-center text-[var(--ink-muted)]">
         در حال حاضر پروژه‌ای برای نمایش وجود ندارد.
       </p>
     );
@@ -138,10 +138,10 @@ export default function ProjectAccordion({ endpoint }: { endpoint: string }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: Math.min(i * 0.05, 0.3) }}
-              className={`overflow-hidden  border transition-colors duration-300 ${
+              className={`overflow-hidden rounded-2xl border transition-colors duration-300 ${
                 open
-                  ? "border-[var(--copper)] bg-[var(--navy-raised)]"
-                  : "border-[var(--border-card)] bg-[var(--surface-card)] hover:border-[var(--border-strong)]"
+                  ? "border-[var(--gold)]/40 bg-[var(--surface-2)]"
+                  : "border-[var(--line)] bg-[var(--surface)] hover:border-[var(--line-strong)]"
               }`}
             >
               <button
@@ -150,15 +150,15 @@ export default function ProjectAccordion({ endpoint }: { endpoint: string }) {
                 className="flex w-full items-center justify-between gap-4 px-6 py-6 text-right transition-colors hover:bg-white/[0.03]"
               >
                 <div className="flex items-start gap-4">
-                  <span className="mt-0.5 text-sm font-bold text-[var(--copper)]">
+                  <span className="display-en mt-0.5 text-sm font-bold text-[var(--gold)]/70">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <h2 className="text-lg font-bold text-white">
+                    <h2 className="text-lg font-bold text-[var(--ink)]">
                       {project.title}
                     </h2>
                     {project.shortDesc && (
-                      <p className="mt-1 text-sm text-[var(--text-muted)]">
+                      <p className="mt-1 text-sm text-[var(--ink-muted)]">
                         {project.shortDesc}
                       </p>
                     )}
@@ -167,10 +167,10 @@ export default function ProjectAccordion({ endpoint }: { endpoint: string }) {
                 <motion.span
                   animate={{ rotate: open ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
-                  className={`shrink-0 border p-2 transition-colors ${
+                  className={`shrink-0 rounded-full border p-2 transition-colors ${
                     open
-                      ? "border-[var(--copper)] text-[var(--copper)]"
-                      : "border-[var(--border-card)] text-[var(--text-muted)]"
+                      ? "border-[var(--gold)]/40 text-[var(--gold)]"
+                      : "border-[var(--line)] text-[var(--ink-muted)]"
                   }`}
                 >
                   <ChevronDown className="h-4 w-4" />
@@ -188,7 +188,7 @@ export default function ProjectAccordion({ endpoint }: { endpoint: string }) {
                   >
                     <div className="px-6 pb-7">
                       {project.fullDesc && (
-                        <p className="mb-6 leading-8 text-[var(--text-body)]">
+                        <p className="mb-6 leading-8 text-[var(--ink-soft)]">
                           {project.fullDesc}
                         </p>
                       )}
@@ -201,7 +201,7 @@ export default function ProjectAccordion({ endpoint }: { endpoint: string }) {
                           loop={project.images.length > 1}
                           spaceBetween={12}
                           slidesPerView={1}
-                          className="overflow-hidden border border-[var(--border-card)]"
+                          className="overflow-hidden rounded-2xl border border-[var(--line)]"
                         >
                           {project.images.map((src, idx) => (
                             <SwiperSlide key={idx}>
@@ -209,7 +209,7 @@ export default function ProjectAccordion({ endpoint }: { endpoint: string }) {
                                 onClick={() =>
                                   setFullscreen({ project, startIndex: idx })
                                 }
-                                className="group relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden bg-[var(--navy-deep)]"
+                                className="group relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden bg-[#0d0d10]"
                               >
                                 {broken[src] ? (
                                   <ImagePlaceholder title={project.title} />
@@ -223,7 +223,7 @@ export default function ProjectAccordion({ endpoint }: { endpoint: string }) {
                                       onError={() => markBroken(src)}
                                       className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
                                     />
-                                    <span className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/60 px-3 py-1.5 text-xs text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
+                                    <span className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/60 px-3 py-1.5 text-xs text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
                                       <Expand className="h-3.5 w-3.5" />
                                       بزرگ‌نمایی
                                     </span>
@@ -256,7 +256,7 @@ export default function ProjectAccordion({ endpoint }: { endpoint: string }) {
             <button
               onClick={() => setFullscreen(null)}
               aria-label="بستن"
-              className="absolute top-6 right-6 z-10 border border-white/20 p-3 text-white transition-colors hover:border-[var(--copper)] hover:text-[var(--copper)]"
+              className="absolute top-6 right-6 z-10 rounded-full border border-white/20 p-3 text-white transition-colors hover:border-[var(--gold)] hover:text-[var(--gold)]"
             >
               <X className="h-5 w-5" />
             </button>
@@ -272,11 +272,11 @@ export default function ProjectAccordion({ endpoint }: { endpoint: string }) {
                 spaceBetween={12}
                 slidesPerView={1}
                 initialSlide={fullscreen.startIndex ?? 0}
-                className=""
+                className="rounded-2xl"
               >
                 {fullscreen.project.images.map((src, idx) => (
                   <SwiperSlide key={idx}>
-                    <div className="flex aspect-[16/9] w-full items-center justify-center overflow-hidden bg-[var(--navy-deep)]">
+                    <div className="flex aspect-[16/9] w-full items-center justify-center overflow-hidden rounded-2xl bg-[#0d0d10]">
                       {broken[src] ? (
                         <ImagePlaceholder title={fullscreen.project.title} />
                       ) : (

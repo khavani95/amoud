@@ -2,74 +2,108 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import SectionHead from "@/components/SectionHead";
-import PageHeader from "@/components/PageHeader";
-import { company, stats, goals } from "@/data/company";
+import Link from "next/link";
+import { Target, Eye, Leaf, ArrowLeft } from "lucide-react";
+
+const pillars = [
+  {
+    icon: Target,
+    title: "مأموریت ما",
+    desc: "ارائهٔ خدمات پیمانکاری و ساختمانی در بالاترین سطح استانداردهای بین‌المللی، همراه با نوآوری و رعایت اصول پایداری.",
+  },
+  {
+    icon: Eye,
+    title: "چشم‌انداز ما",
+    desc: "تبدیل‌شدن به یکی از برترین شرکت‌های پیمانکاری و ساختمانی منطقه و ارائهٔ الگویی از تعهد، تخصص و نوآوری.",
+  },
+  {
+    icon: Leaf,
+    title: "توسعهٔ پایدار",
+    desc: "پایبندی به اصول پایداری و توسعهٔ سبز در تمام مراحل طراحی و اجرای پروژه‌ها.",
+  },
+];
 
 export default function About() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-[var(--bg)]">
       <Navbar />
       <main className="flex-grow">
-        <PageHeader title="درباره ما" subtitle={company.tagline} />
-
-        <section className="amoud-container py-14">
-          <SectionHead title="معرفی شرکت" index="۰۱" />
-
-          {/* About + stats */}
-          <Reveal delay={70}>
-            <div className="card mt-8 p-8 sm:p-10">
-              <div className="flex items-center gap-3">
-                <span className="bullet" />
-                <span className="text-[17px] font-extrabold text-[var(--copper)]">
-                  درباره ما
-                </span>
-              </div>
-              <p className="mt-4 text-[15.5px] leading-[2.2] text-[var(--text-body)]">
-                {company.about}
+        {/* Header */}
+        <section className="relative pt-36 pb-16 bg-grid border-b border-[var(--line)]">
+          <div className="amoud-container text-center">
+            <Reveal>
+              <span className="eyebrow justify-center mb-5">
+                آمود گستر آتیه
+              </span>
+              <h1 className="text-4xl sm:text-5xl font-black text-[var(--ink)]">
+                دربارهٔ <span className="text-gradient-gold">ما</span>
+              </h1>
+              <p className="mx-auto mt-5 max-w-2xl leading-8 text-[var(--ink-muted)]">
+                تخصص، تعهد و نوآوری در صنعت ساختمان از سال ۱۳۸۰
               </p>
-              <div className="mt-8 grid grid-cols-2 gap-6 border-t border-white/15 pt-6 lg:grid-cols-4">
-                {stats.map((s) => (
-                  <div key={s.label}>
-                    <div className="text-[26px] font-black text-white">
-                      {s.value}
-                    </div>
-                    <div className="mt-1 text-[12.5px] text-[var(--text-muted)]">
-                      {s.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
+        </section>
 
-          {/* Goals & vision */}
-          <Reveal delay={120}>
-            <div className="card mt-6 p-8 sm:p-10">
-              <div className="flex items-center gap-3">
-                <span className="bullet" />
-                <span className="text-[17px] font-extrabold text-white">
-                  اهداف و چشم‌انداز
-                </span>
+        {/* Body */}
+        <section className="amoud-container py-16">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+            <Reveal>
+              <div className="overflow-hidden rounded-3xl border border-[var(--line)] aspect-[4/3]">
+                <img
+                  src="/projects/Aseman-alborz.jpg"
+                  alt="پروژه‌های آمود"
+                  className="h-full w-full object-cover"
+                />
               </div>
-              <div className="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-x-10">
-                {goals.map((g) => (
-                  <div key={g.no} className="flex items-baseline gap-3">
-                    <span className="text-[15px] font-black text-[var(--copper)]">
-                      {g.no}
-                    </span>
-                    <div>
-                      <div className="text-[15.5px] font-bold text-white">
-                        {g.title}
-                      </div>
-                      <p className="mt-1 text-[13px] leading-[1.9] text-[#a9b6c9]">
-                        {g.desc}
-                      </p>
-                    </div>
+            </Reveal>
+            <Reveal delay={120}>
+              <div className="space-y-5 leading-8 text-[var(--ink-soft)]">
+                <p>
+                  شرکت{" "}
+                  <span className="font-bold text-[var(--gold)]">
+                    آمودگسترآتیه
+                  </span>{" "}
+                  با سال‌ها تجربه در زمینهٔ اجرای پروژه‌های ساختمانی، تأسیسات
+                  الکتریکال و مکانیکال، و پیمانکاری در پروژه‌های بزرگ ملی و
+                  منطقه‌ای فعالیت می‌کند. این شرکت با بهره‌گیری از نیروهای متخصص
+                  و فناوری‌های روز، همواره در تلاش است بهترین کیفیت و بالاترین
+                  استانداردها را ارائه دهد.
+                </p>
+                <p className="text-[var(--ink-muted)]">
+                  رزومهٔ کاری آمودگسترآتیه شامل اجرای پروژه‌های مسکونی، برج‌های
+                  اداری، پروژه‌های صنعتی و تأسیسات زیربنایی است. ما با تمرکز بر
+                  مدیریت زمان، کیفیت و هزینه، توانسته‌ایم اعتماد کارفرمایان بزرگ و
+                  معتبر کشور را جلب کنیم.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Pillars */}
+          <div className="mt-16 grid gap-6 md:grid-cols-3">
+            {pillars.map((p, i) => (
+              <Reveal key={p.title} delay={i * 90}>
+                <div className="card h-full p-8">
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--gold-glow)] text-[var(--gold)]">
+                    <p.icon className="h-7 w-7" strokeWidth={1.6} />
                   </div>
-                ))}
-              </div>
-            </div>
+                  <h3 className="text-lg font-bold text-[var(--ink)]">
+                    {p.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-[var(--ink-muted)]">
+                    {p.desc}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="mt-14 text-center">
+            <Link href="/contracting-projects" className="btn btn-gold">
+              مشاهدهٔ پروژه‌ها
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
           </Reveal>
         </section>
       </main>

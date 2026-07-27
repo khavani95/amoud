@@ -17,15 +17,14 @@ const vazir = Vazirmatn({
 export const metadata: Metadata = {
   metadataBase: new URL("https://amoud-co.ir"),
   title: {
-    default: "آمود گستر آتیه | مجری تخصصی تاسیسات الکتریکال و مکانیکال",
+    default: "آمود گستر آتیه | ساخت‌وساز، پیمانکاری و تأسیسات",
     template: "%s | آمود گستر آتیه",
   },
   description:
-    "شرکت آمود گستر آتیه از سال ۱۳۸۰ مجری اجرای دستمزدی عملیات تاسیسات الکتریکال و مکانیکال پروژه‌های مسکونی، اداری، تجاری، بیمارستانی و برج‌های بلندمرتبه است.",
+    "مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی با تمرکز تخصصی بر تأسیسات برق و مکانیک — از سال ۱۳۸۰.",
   keywords: [
     "آمود گستر آتیه",
-    "اجرای دستمزدی تاسیسات",
-    "پیمانکاری تاسیسات",
+    "پیمانکاری ساختمان",
     "تأسیسات الکتریکال",
     "تأسیسات مکانیکال",
     "مشارکت در ساخت",
@@ -36,9 +35,9 @@ export const metadata: Metadata = {
     apple: "/brand/logo.png",
   },
   openGraph: {
-    title: "آمود گستر آتیه | مجری تخصصی تاسیسات الکتریکال و مکانیکال",
+    title: "آمود گستر آتیه | ساخت‌وساز، پیمانکاری و تأسیسات",
     description:
-      "شرکت آمود گستر آتیه از سال ۱۳۸۰ مجری اجرای دستمزدی عملیات تاسیسات الکتریکال و مکانیکال پروژه‌های مسکونی، اداری، تجاری، بیمارستانی و برج‌های بلندمرتبه است.",
+      "مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی با تمرکز تخصصی بر تأسیسات برق و مکانیک — از سال ۱۳۸۰.",
     url: "https://amoud-co.ir",
     siteName: "آمود گستر آتیه",
     images: [
@@ -64,7 +63,7 @@ export default function RootLayout({
         <link rel="icon" type="image/webp" sizes="32x32" href="/favicon-32x32.webp" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.webp" />
       </head>
-      <body className="font-vazir">
+      <body className="font-vazir bg-[#0a0a0c]">
         <PageTransition>{children}</PageTransition>
         <SpeedInsights />
         
