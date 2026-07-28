@@ -30,7 +30,7 @@ function useBrokenImages() {
 function ImagePlaceholder({ title }: { title: string }) {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#0d0d10] text-center">
-      <img src="/logo.webp" alt="" className="logo-invert h-14 w-auto opacity-40" />
+      <img src="/brand/logo.png" alt="" className="logo-invert h-14 w-auto opacity-40" />
       <span className="px-6 text-sm text-[var(--ink-muted)]">{title}</span>
     </div>
   );

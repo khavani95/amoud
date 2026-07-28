@@ -30,9 +30,9 @@ export const metadata: Metadata = {
     "مشارکت در ساخت",
   ],
   icons: {
-    icon: "/logo192.webp",
-    shortcut: "/logo192.webp",
-    apple: "/logo192.webp",
+    icon: "/brand/logo.png",
+    shortcut: "/brand/logo.png",
+    apple: "/brand/logo.png",
   },
   openGraph: {
     title: "آمود گستر آتیه | ساخت‌وساز، پیمانکاری و تأسیسات",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     siteName: "آمود گستر آتیه",
     images: [
       {
-        url: "/logo192.webp",
+        url: "/brand/logo.png",
         width: 600,
         height: 600,
         alt: "لوگو آمود",

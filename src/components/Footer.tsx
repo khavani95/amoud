@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
               <img
-                src="/logo.webp"
+                src="/brand/logo.png"
                 alt="آمود گستر آتیه"
                 className="logo-invert h-14 w-auto"
               />

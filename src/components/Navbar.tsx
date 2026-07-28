@@ -48,7 +48,7 @@ export default function Navbar() {
         {/* Logo (right in RTL) */}
         <Link href="/home" className="flex items-center gap-3 order-2 group">
           <img
-            src="/logo.webp"
+            src="/brand/logo.png"
             alt="آمود گستر آتیه"
             className="logo-invert h-12 md:h-14 w-auto transition-transform duration-500 group-hover:scale-105"
           />

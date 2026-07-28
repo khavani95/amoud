@@ -9,11 +9,9 @@ export default function Splash() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShow(false); // لوگو محو میشه
-      setTimeout(() => {
-        router.push("/home"); // بعد میره به home
-      }, 700);
-    }, 2500);
+      setShow(false);
+      setTimeout(() => router.push("/home"), 600);
+    }, 1900);
     return () => clearTimeout(timer);
   }, [router]);
 
@@ -21,36 +19,40 @@ export default function Splash() {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="flex items-center justify-center h-screen bg-[#0a0a0c]"
+          className="flex h-screen flex-col items-center justify-center gap-6 bg-[var(--bg)]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
         >
-          <motion.div
-            className="w-[80vw] max-w-[550px] aspect-square flex items-center justify-center"
-            initial={{ scale: 0.8, opacity: 0 }}
+          <motion.img
+            src="/brand/logo.png"
+            alt="آمود گستر آتیه"
+            className="logo-invert w-[150px] max-w-[45vw]"
+            initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 1, opacity: 0 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          />
+
+          <motion.div
+            className="h-[3px] rounded-full bg-gradient-to-l from-[var(--gold-soft)] to-[var(--gold-deep)]"
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: 64, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+          />
+
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
           >
-            {/* The brand animation is dark-on-white artwork: invert it so the
-                mark reads light, then feather the edges so the video's
-                rectangle dissolves into the dark page. */}
-            <video
-              src="/Amud.webm"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-contain"
-              style={{
-                filter: "invert(1)",
-                WebkitMaskImage:
-                  "radial-gradient(circle at center, #000 42%, transparent 70%)",
-                maskImage:
-                  "radial-gradient(circle at center, #000 42%, transparent 70%)",
-              }}
-            />
+            <div className="text-[15px] font-bold text-[var(--ink)]">
+              آمود گستر آتیه
+            </div>
+            <div className="display-en mt-1 text-[11px] text-[var(--ink-muted)]">
+              AMOUD GOSTAR ATIEH Co.
+            </div>
           </motion.div>
         </motion.div>
       )}
