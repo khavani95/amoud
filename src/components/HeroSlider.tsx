@@ -102,21 +102,24 @@ export default function HeroSlider() {
           </span>
 
           <h1
-            className="text-4xl sm:text-6xl lg:text-7xl font-black leading-[1.15] text-[var(--ink)] opacity-0 animate-[fadeUp_.7s_ease_forwards]"
+            className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.2] text-[var(--ink)] opacity-0 animate-[fadeUp_.7s_ease_forwards]"
             style={{ animationDelay: "0.25s" }}
           >
-            ساختِ آینده،
+            پیمانکاری ساختمان و
             <br />
-            بر پایهٔ{" "}
-            <span className="text-gradient-gold">اعتماد و تخصص</span>
+            اجرای{" "}
+            <span className="text-gradient-gold">
+              تاسیسات الکتریکال و مکانیکال
+            </span>
           </h1>
 
           <p
             className="mt-6 max-w-xl text-base sm:text-lg leading-8 text-[var(--ink-soft)] opacity-0 animate-[fadeUp_.7s_ease_forwards]"
             style={{ animationDelay: "0.4s" }}
           >
-            مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی با تمرکز
-            تخصصی بر تأسیسات برق و مکانیک — بیش از دو دهه تجربه در ساخت.
+            شرکت آمود گستر آتیه، پیمانکار و سازنده ساختمان از سال ۱۳۸۰؛ مشارکت
+            در ساخت، ساختمان‌سازی و اجرای تاسیسات برق و مکانیک پروژه‌های مسکونی،
+            تجاری، اداری و بیمارستانی.
           </p>
 
           <div

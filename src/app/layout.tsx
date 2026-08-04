@@ -1,56 +1,80 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Vazirmatn } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import PageTransition from "@/components/PageTransition"; // 👈 اضافه شد
+import PageTransition from "@/components/PageTransition";
+import { KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/seo";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/thumbs";
 
 const vazir = Vazirmatn({
   subsets: ["arabic"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "700", "800", "900"],
   variable: "--font-vazir",
+  display: "swap",
 });
 
+const DEFAULT_TITLE =
+  "آمود گستر آتیه | پیمانکاری ساختمان و تاسیسات الکتریکال و مکانیکال";
+const DEFAULT_DESC =
+  "شرکت آمود گستر آتیه؛ پیمانکار و سازنده ساختمان از سال ۱۳۸۰. مشارکت در ساخت، ساختمان‌سازی و اجرای تاسیسات الکتریکال و مکانیکال، موتورخانه و تابلو برق.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://amoud-co.ir"),
-  title: {
-    default: "آمود گستر آتیه | ساخت‌وساز، پیمانکاری و تأسیسات",
-    template: "%s | آمود گستر آتیه",
-  },
-  description:
-    "مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی با تمرکز تخصصی بر تأسیسات برق و مکانیک — از سال ۱۳۸۰.",
-  keywords: [
-    "آمود گستر آتیه",
-    "پیمانکاری ساختمان",
-    "تأسیسات الکتریکال",
-    "تأسیسات مکانیکال",
-    "مشارکت در ساخت",
-  ],
+  metadataBase: new URL(SITE_URL),
+  title: { default: DEFAULT_TITLE, template: `%s | ${SITE_NAME}` },
+  description: DEFAULT_DESC,
+  keywords: KEYWORDS,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  manifest: "/manifest.json",
+  alternates: { canonical: SITE_URL },
+  formatDetection: { telephone: true, address: true, email: true },
   icons: {
-    icon: "/brand/logo.png",
-    shortcut: "/brand/logo.png",
-    apple: "/brand/logo.png",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-32x32.webp", type: "image/webp", sizes: "32x32" },
+      { url: "/brand/logo.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.webp",
   },
   openGraph: {
-    title: "آمود گستر آتیه | ساخت‌وساز، پیمانکاری و تأسیسات",
-    description:
-      "مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی با تمرکز تخصصی بر تأسیسات برق و مکانیک — از سال ۱۳۸۰.",
-    url: "https://amoud-co.ir",
-    siteName: "آمود گستر آتیه",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESC,
+    url: SITE_URL,
+    siteName: SITE_NAME,
     images: [
-      {
-        url: "/brand/logo.png",
-        width: 600,
-        height: 600,
-        alt: "لوگو آمود",
-      },
+      { url: "/brand/logo.png", width: 1200, height: 630, alt: SITE_NAME },
     ],
     locale: "fa_IR",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESC,
+    images: ["/brand/logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+};
+
+export const viewport = {
+  themeColor: "#0a0a0c",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -58,15 +82,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fa" dir="rtl" className={vazir.variable}>
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" type="image/webp" sizes="32x32" href="/favicon-32x32.webp" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.webp" />
-      </head>
       <body className="font-vazir bg-[#0a0a0c]">
         <PageTransition>{children}</PageTransition>
         <SpeedInsights />
-        
       </body>
     </html>
   );
