@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
 
 const links = [
-  { href: "/home", label: "خانه" },
+  { href: "/", label: "خانه" },
   { href: "/about", label: "درباره ما" },
   { href: "/sale", label: "واحد فروش" },
   { href: "/contact", label: "تماس با ما" },
@@ -46,7 +46,7 @@ export default function Navbar() {
     >
       <div className="amoud-container flex items-center justify-between">
         {/* Logo (right in RTL) */}
-        <Link href="/home" className="flex items-center gap-3 order-2 group">
+        <Link href="/" className="flex items-center gap-3 order-2 group">
           <img
             src="/brand/logo.png"
             alt="آمود گستر آتیه"

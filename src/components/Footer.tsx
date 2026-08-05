@@ -33,7 +33,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-sm">
               {[
-                { href: "/home", label: "خانه" },
+                { href: "/", label: "خانه" },
                 { href: "/about", label: "درباره ما" },
                 { href: "/sale", label: "واحد فروش" },
                 { href: "/contact", label: "تماس با ما" },
