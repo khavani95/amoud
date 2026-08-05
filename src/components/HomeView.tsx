@@ -84,7 +84,11 @@ const values = [
   },
 ];
 
-export default function HomeView() {
+export default function HomeView({
+  latestArticles,
+}: {
+  latestArticles?: React.ReactNode;
+}) {
   return (
     <main className="bg-[var(--bg)]">
       <Navbar />
@@ -275,6 +279,8 @@ export default function HomeView() {
           </div>
         </div>
       </section>
+
+      {latestArticles}
 
       <Faq />
 
