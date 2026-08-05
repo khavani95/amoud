@@ -4,16 +4,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
 
-const links = [
-  { href: "/", label: "خانه" },
-  { href: "/about", label: "درباره ما" },
-  { href: "/sale", label: "واحد فروش" },
-  { href: "/contact", label: "تماس با ما" },
-];
+const leadingLinks = [{ href: "/", label: "خانه" }];
 
 const projectLinks = [
   { href: "/construction-projects", label: "پروژه‌های ساخت‌وساز" },
   { href: "/contracting-projects", label: "پروژه‌های پیمانکاری" },
+];
+
+const trailingLinks = [
+  { href: "/blog", label: "مقالات" },
+  { href: "/about", label: "درباره ما" },
+  { href: "/sale", label: "واحد فروش" },
+  { href: "/contact", label: "تماس با ما" },
 ];
 
 export default function Navbar() {
@@ -28,12 +30,10 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+  useEffect(() => setIsOpen(false), [pathname]);
 
   const isActive = (href: string) =>
-    pathname === href || pathname.startsWith(href + "/");
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
   const projectsActive = projectLinks.some((l) => isActive(l.href));
 
   return (
@@ -44,26 +44,34 @@ export default function Navbar() {
           : "bg-transparent py-4"
       }`}
     >
-      <div className="amoud-container flex items-center justify-between">
-        {/* Logo (right in RTL) */}
-        <Link href="/" className="flex items-center gap-3 order-2 group">
-          <img
-            src="/brand/logo.png"
-            alt="آمود گستر آتیه"
-            className="logo-invert h-12 md:h-14 w-auto transition-transform duration-500 group-hover:scale-105"
-          />
-          <span className="hidden sm:block text-sm font-bold text-[var(--ink-soft)]">
-            آمود گستر آتیه
-          </span>
-        </Link>
+      {/* Three tracks: in RTL the first column sits right, the last sits left —
+          so the CTA is on the right, the menu centred, the logo on the left. */}
+      <div className="amoud-container grid grid-cols-[auto_1fr_auto] items-center gap-4">
+        {/* CTA + mobile toggle (right) */}
+        <div className="flex items-center gap-3">
+          <a
+            href="tel:+982144711222"
+            className="hidden lg:inline-flex btn btn-gold !py-2.5 !px-5 !text-sm"
+          >
+            <Phone className="w-4 h-4" />
+            مشاوره رایگان
+          </a>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="منو"
+            aria-expanded={isOpen}
+            className="lg:hidden text-[var(--ink)] p-2"
+          >
+            {isOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
 
-        {/* Desktop menu */}
-        <ul className="hidden lg:flex items-center gap-1 order-1">
-          {links.slice(0, 1).map((l) => (
+        {/* Menu (centre) */}
+        <ul className="hidden lg:flex items-center justify-center gap-1">
+          {leadingLinks.map((l) => (
             <NavItem key={l.href} {...l} active={isActive(l.href)} />
           ))}
 
-          {/* Projects dropdown */}
           <li className="relative group">
             <button
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
@@ -75,7 +83,7 @@ export default function Navbar() {
               پروژه‌ها
               <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
             </button>
-            <div className="absolute top-full right-0 pt-3 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+            <div className="absolute top-full right-1/2 translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
               <ul className="min-w-[230px] rounded-2xl border border-[var(--line)] bg-[#101014]/95 backdrop-blur-xl p-2 shadow-2xl">
                 {projectLinks.map((p) => (
                   <li key={p.href}>
@@ -95,39 +103,33 @@ export default function Navbar() {
             </div>
           </li>
 
-          {links.slice(1).map((l) => (
+          {trailingLinks.map((l) => (
             <NavItem key={l.href} {...l} active={isActive(l.href)} />
           ))}
         </ul>
 
-        {/* CTA + mobile toggle */}
-        <div className="flex items-center gap-3 order-3">
-          <a
-            href="tel:+982144711222"
-            className="hidden lg:inline-flex btn btn-gold !py-2.5 !px-5 !text-sm"
-          >
-            <Phone className="w-4 h-4" />
-            مشاوره رایگان
-          </a>
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="منو"
-            className="lg:hidden text-[var(--ink)] p-2"
-          >
-            {isOpen ? <X size={26} /> : <Menu size={26} />}
-          </button>
-        </div>
+        {/* Logo (left) */}
+        <Link href="/" className="flex items-center gap-3 group justify-self-end">
+          <span className="hidden xl:block text-sm font-bold text-[var(--ink-soft)]">
+            آمود گستر آتیه
+          </span>
+          <img
+            src="/brand/logo.png"
+            alt="آمود گستر آتیه"
+            className="logo-invert h-12 md:h-14 w-auto transition-transform duration-500 group-hover:scale-105"
+          />
+        </Link>
       </div>
 
       {/* Mobile menu */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-500 ${
-          isOpen ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0"
+          isOpen ? "max-h-[560px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="amoud-container pt-4 pb-6">
           <ul className="flex flex-col gap-1 rounded-2xl border border-[var(--line)] bg-[#101014]/95 backdrop-blur-xl p-3">
-            {[links[0], ...projectLinks, ...links.slice(1)].map((l) => (
+            {[...leadingLinks, ...projectLinks, ...trailingLinks].map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}

@@ -1,5 +1,6 @@
 import HomeView from "@/components/HomeView";
 import SplashOverlay from "@/components/SplashOverlay";
+import LatestArticles from "@/components/LatestArticles";
 import { OrganizationJsonLd } from "@/components/JsonLd";
 import FaqJsonLd from "@/components/FaqJsonLd";
 import { pageMetadata } from "@/lib/seo";
@@ -18,7 +19,7 @@ export default function Page() {
       <FaqJsonLd />
       {/* Content renders server-side; the splash is a client overlay on top,
           so crawlers always receive the full homepage HTML. */}
-      <HomeView />
+      <HomeView latestArticles={<LatestArticles />} />
       <SplashOverlay />
     </>
   );
