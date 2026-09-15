@@ -69,6 +69,18 @@ export const services = [
   },
 ];
 
+/**
+ * Secondary offering: the company does take on مشارکت در ساخت, but the
+ * current focus is contracting, so it is presented below the two main
+ * service lines rather than alongside them.
+ */
+export const secondaryService = {
+  title: "مشارکت در ساخت",
+  desc: "آمود گستر آتیه در کنار فعالیت اصلی خود، مشارکت در ساخت پروژه‌های مسکونی و تجاری را نیز می‌پذیرد. تمرکز فعلی مجموعه بر پیمانکاری و اجرای تاسیسات است، اما برای بررسی پیشنهاد مشارکت می‌توانید با ما تماس بگیرید.",
+  href: "/blog/mosharekat-dar-sakht-rahnama",
+  linkLabel: "راهنمای مشارکت در ساخت",
+};
+
 export interface FeaturedProject {
   id: string;
   title: string;

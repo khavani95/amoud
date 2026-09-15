@@ -37,7 +37,6 @@ export default function Footer() {
                 { href: "/", label: "خانه" },
                 { href: "/about", label: "درباره ما" },
                 { href: "/blog", label: "مقالات" },
-                { href: "/sale", label: "واحد فروش" },
                 { href: "/contact", label: "تماس با ما" },
               ].map((l) => (
                 <li key={l.href}>

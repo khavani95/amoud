@@ -22,6 +22,7 @@ import {
   contact,
   stats,
   services,
+  secondaryService,
   otherProjects,
 } from "@/data/company";
 
@@ -188,6 +189,27 @@ export default function HomeView({
             );
           })}
         </div>
+
+        {/* Secondary offering — kept below the two main lines on purpose */}
+        <Reveal delay={180}>
+          <div className="card mt-6 flex flex-col gap-5 rounded-3xl p-8 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="text-lg font-bold text-[var(--ink)]">
+                {secondaryService.title}
+              </h3>
+              <p className="mt-2 max-w-2xl text-sm leading-7 text-[var(--ink-muted)]">
+                {secondaryService.desc}
+              </p>
+            </div>
+            <Link
+              href={secondaryService.href}
+              className="btn btn-ghost shrink-0 !py-2.5 !text-sm"
+            >
+              {secondaryService.linkLabel}
+              <ArrowLeft className="h-4 w-4" />
+            </Link>
+          </div>
+        </Reveal>
       </section>
 
       {/* Featured projects */}

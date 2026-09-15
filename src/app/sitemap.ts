@@ -15,7 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/construction-projects", priority: 0.9, freq: "weekly" },
     { path: "/contracting-projects", priority: 0.9, freq: "weekly" },
     { path: "/about", priority: 0.8, freq: "monthly" },
-    { path: "/sale", priority: 0.8, freq: "weekly" },
     { path: "/contact", priority: 0.7, freq: "monthly" },
   ];
 
