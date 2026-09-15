@@ -1,16 +1,13 @@
 "use client";
 import Link from "next/link";
 import {
-  Building2,
   Zap,
   Wrench,
-  Store,
-  Cross,
-  Handshake,
-  ShieldCheck,
-  Users,
-  Award,
-  Clock,
+  ClipboardCheck,
+  HardHat,
+  Target,
+  Eye,
+  Gem,
   ArrowLeft,
   Phone,
 } from "lucide-react";
@@ -20,68 +17,20 @@ import HeroSlider from "@/components/HeroSlider";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import Reveal from "@/components/Reveal";
 import Faq from "@/components/Faq";
+import {
+  company,
+  contact,
+  stats,
+  services,
+  otherProjects,
+} from "@/data/company";
 
-const stats = [
-  { value: "۱۳۸۰", label: "سال تأسیس" },
-  { value: "+۲۰", label: "سال تجربه" },
-  { value: "+۲۸۰۰", label: "واحد مسکونی" },
-  { value: "۴", label: "حوزهٔ تخصصی" },
-];
+const serviceIcons = [ClipboardCheck, HardHat];
 
-const services = [
-  {
-    icon: Building2,
-    title: "ساختمان‌سازی و انبوه‌سازی",
-    desc: "به‌عنوان سازنده و پیمانکار ساختمان، طراحی و اجرای مجتمع‌ها و برج‌های مسکونی را با بالاترین استانداردهای ساخت بر عهده می‌گیریم.",
-  },
-  {
-    icon: Zap,
-    title: "تاسیسات الکتریکال",
-    desc: "پیمانکار برق: اجرای برق‌رسانی، تابلو برق، روشنایی و شبکه‌های جریان ضعیف ساختمان‌ها و پروژه‌های کلان.",
-  },
-  {
-    icon: Wrench,
-    title: "تاسیسات مکانیکال و موتورخانه",
-    desc: "پیمانکار مکانیک: اجرای موتورخانه، لوله‌کشی، سرمایش و گرمایش، اطفای حریق و شبکه‌های آب و فاضلاب.",
-  },
-  {
-    icon: Store,
-    title: "پروژه‌های تجاری و اداری",
-    desc: "پیمانکاری و احداث مجموعه‌های تجاری، اداری و برج‌های چندمنظوره متناسب با نیاز کارفرمایان.",
-  },
-  {
-    icon: Cross,
-    title: "پروژه‌های بیمارستانی",
-    desc: "اجرای تاسیسات پروژه‌های درمانی و بیمارستانی با رعایت الزامات تخصصی فضاهای درمانی.",
-  },
-  {
-    icon: Handshake,
-    title: "مشارکت در ساخت",
-    desc: "مشارکت در ساخت پروژه‌های مسکونی و تجاری با تعهد، شفافیت کامل و تقسیم منصفانه.",
-  },
-];
-
-const values = [
-  {
-    icon: Award,
-    title: "تجربهٔ اثبات‌شده",
-    desc: "بیش از دو دهه سابقهٔ اجرای موفق پروژه‌های متنوع.",
-  },
-  {
-    icon: Users,
-    title: "تیم متخصص",
-    desc: "بهره‌گیری از نیروهای مجرب در حوزهٔ عمران و تأسیسات.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "کیفیت و استاندارد",
-    desc: "پایبندی به بالاترین استانداردهای کیفی در تمام مراحل.",
-  },
-  {
-    icon: Clock,
-    title: "تحویل به‌موقع",
-    desc: "مدیریت دقیق زمان و هزینه برای تحویل به‌هنگام پروژه‌ها.",
-  },
+const principles = [
+  { icon: Eye, title: "چشم‌انداز", text: company.vision },
+  { icon: Gem, title: "ارزش‌های محوری", text: company.values },
+  { icon: Target, title: "مأموریت", text: company.mission },
 ];
 
 export default function HomeView({
@@ -94,7 +43,7 @@ export default function HomeView({
       <Navbar />
       <HeroSlider />
 
-      {/* Marquee strip */}
+      {/* Capability strip */}
       <section className="marquee border-y border-[var(--line)] bg-[#0c0c10] py-5">
         <div className="marquee-track">
           {[0, 1].map((r) => (
@@ -105,13 +54,14 @@ export default function HomeView({
               dir="rtl"
             >
               {[
+                "تاسیسات الکتریکال",
+                "تاسیسات مکانیکال",
+                "موتورخانه",
                 "مسکونی",
-                "تجاری",
                 "اداری",
+                "تجاری",
                 "بیمارستانی",
-                "تأسیسات برق",
-                "تأسیسات مکانیک",
-                "مشارکت در ساخت",
+                "برج‌های بلندمرتبه",
               ].map((t) => (
                 <span
                   key={t}
@@ -128,11 +78,11 @@ export default function HomeView({
 
       {/* Stats */}
       <section className="amoud-container py-16">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid gap-6 sm:grid-cols-3">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 80}>
-              <div className="card p-8 text-center">
-                <div className="display-en text-4xl sm:text-5xl font-black text-gradient-gold">
+              <div className="card rounded-3xl p-8 text-center">
+                <div className="display-en text-4xl font-black text-gradient-gold sm:text-5xl">
                   {s.value}
                 </div>
                 <div className="mt-3 text-sm text-[var(--ink-muted)]">
@@ -149,18 +99,18 @@ export default function HomeView({
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <Reveal>
             <div className="relative">
-              <div className="overflow-hidden rounded-3xl border border-[var(--line)] aspect-[4/5]">
+              <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-[var(--line)]">
                 <img
-                  src="/projects/Yas-Residential-Towers.webp"
-                  alt="پروژه‌های آمود"
+                  src="/brand/negin-night.jpg"
+                  alt="برج‌های نگین ساحل — پروژه آمود گستر آتیه"
                   className="h-full w-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-2 sm:left-6 card p-6 w-44 text-center backdrop-blur">
+              <div className="card absolute -bottom-6 -left-2 w-44 rounded-2xl p-6 text-center backdrop-blur sm:left-6">
                 <div className="display-en text-3xl font-black text-gradient-gold">
                   ۱۳۸۰
                 </div>
-                <div className="text-xs text-[var(--ink-muted)] mt-1">
+                <div className="mt-1 text-xs text-[var(--ink-muted)]">
                   آغاز فعالیت
                 </div>
               </div>
@@ -168,26 +118,18 @@ export default function HomeView({
           </Reveal>
 
           <Reveal delay={120}>
-            <span className="eyebrow mb-5">دربارهٔ آمود</span>
-            <h2 className="text-3xl sm:text-4xl font-black leading-snug text-[var(--ink)]">
-              مجموعه‌ای با کارنامه‌ای از{" "}
-              <span className="text-gradient-gold">اعتماد و کیفیت</span>
+            <span className="eyebrow mb-5">معرفی شرکت</span>
+            <h2 className="text-3xl font-black leading-snug text-[var(--ink)] sm:text-4xl">
+              دو دهه تجربه در{" "}
+              <span className="text-gradient-gold">قلب ساختمان‌ها</span>
             </h2>
-            <p className="mt-6 leading-8 text-[var(--ink-soft)]">
-              شرکت آمود گستر آتیه با هدف مشارکت در ساخت و همکاری در ساختمان‌سازی
-              مجموعه‌های مسکونی، تجاری، اداری و بیمارستانی تأسیس شد و از سال
-              ۱۳۸۰ تاکنون به‌عنوان پیمانکار و سازنده در پروژه‌های متنوع فعالیت
-              کرده است.
-            </p>
-            <p className="mt-4 leading-8 text-[var(--ink-muted)]">
-              تمرکز تخصصی بر تاسیسات الکتریکال و مکانیکال — از تابلو برق و
-              روشنایی تا موتورخانه و اطفای حریق — توانمندی بالایی در اجرای
-              پروژه‌های کلان ایجاد کرده است.
+            <p className="mt-6 leading-9 text-[var(--ink-soft)]">
+              {company.intro}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link href="/about" className="btn btn-gold">
                 بیشتر بدانید
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="h-4 w-4" />
               </Link>
               <Link href="/contact" className="btn btn-ghost">
                 تماس با ما
@@ -199,69 +141,111 @@ export default function HomeView({
 
       {/* Services */}
       <section className="amoud-container py-16">
-        <Reveal className="text-center max-w-2xl mx-auto mb-14">
+        <Reveal className="mx-auto mb-14 max-w-2xl text-center">
           <span className="eyebrow justify-center mb-4">خدمات ما</span>
-          <h2 className="text-3xl sm:text-4xl font-black text-[var(--ink)]">
-            حوزه‌های <span className="text-gradient-gold">تخصصی</span> فعالیت
+          <h2 className="text-3xl font-black text-[var(--ink)] sm:text-4xl">
+            مشاوره و <span className="text-gradient-gold">اجرا</span>
           </h2>
-          <p className="mt-4 text-[var(--ink-muted)] leading-8">
-            از ساختمان‌سازی و مشارکت در ساخت تا اجرای تاسیسات الکتریکال و
-            مکانیکال؛ در تمام مراحل پروژه در کنار شما هستیم.
+          <p className="mt-4 leading-8 text-[var(--ink-muted)]">
+            از طراحی، نظارت و مدیریت پروژه تا اجرای کامل تاسیسات الکتریکال و
+            مکانیکال — با تامین متریال یا به‌صورت دستمزدی.
           </p>
         </Reveal>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => (
-            <Reveal key={s.title} delay={i * 70}>
-              <div className="card group p-8 h-full">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--gold-glow)] text-[var(--gold)] transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
-                  <s.icon className="h-7 w-7" strokeWidth={1.6} />
+        <div className="grid gap-6 lg:grid-cols-2">
+          {services.map((s, i) => {
+            const Icon = serviceIcons[i] ?? Zap;
+            return (
+              <Reveal key={s.slug} delay={i * 90}>
+                <div className="card group flex h-full flex-col rounded-3xl p-8 sm:p-10">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--gold-glow)] text-[var(--gold)] transition-transform duration-500 group-hover:scale-110">
+                    <Icon className="h-7 w-7" strokeWidth={1.6} />
+                  </div>
+                  <h3 className="text-xl font-bold text-[var(--ink)]">
+                    {s.title}
+                  </h3>
+                  <p className="mt-4 leading-8 text-[var(--ink-soft)]">
+                    {s.desc}
+                  </p>
+                  <div className="mt-7 border-t border-[var(--line)] pt-6">
+                    <div className="mb-4 text-sm font-bold text-[var(--gold)]">
+                      {s.pointsTitle}
+                    </div>
+                    <ul className="space-y-3">
+                      {s.points.map((pt) => (
+                        <li
+                          key={pt}
+                          className="flex gap-3 text-sm leading-7 text-[var(--ink-muted)]"
+                        >
+                          <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--gold)]" />
+                          {pt}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-[var(--ink)]">
-                  {s.title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-[var(--ink-muted)]">
-                  {s.desc}
-                </p>
+              </Reveal>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Featured projects */}
+      <section className="amoud-container py-16">
+        <Reveal className="mx-auto mb-12 max-w-2xl text-center">
+          <span className="eyebrow justify-center mb-4">نمونه کارها</span>
+          <h2 className="text-3xl font-black text-[var(--ink)] sm:text-4xl">
+            پروژه‌های <span className="text-gradient-gold">شاخص</span>
+          </h2>
+        </Reveal>
+        <FeaturedProjects />
+      </section>
+
+      {/* Other records */}
+      <section className="amoud-container pb-16">
+        <Reveal className="mb-8">
+          <h2 className="text-2xl font-black text-[var(--ink)]">
+            سایر سوابق اجرایی
+          </h2>
+        </Reveal>
+        <div className="overflow-hidden rounded-3xl border border-[var(--line)]">
+          {otherProjects.map((p, i) => (
+            <Reveal key={p.title} delay={Math.min(i * 50, 250)}>
+              <div
+                className={`flex flex-col gap-2 p-6 sm:flex-row sm:items-center sm:justify-between ${
+                  i ? "border-t border-[var(--line)]" : ""
+                }`}
+              >
+                <div className="flex gap-4">
+                  <span className="display-en text-sm font-bold text-[var(--gold)]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[15px] font-semibold leading-7 text-[var(--ink)]">
+                    {p.title}
+                  </span>
+                </div>
+                {p.client && (
+                  <span className="shrink-0 text-sm text-[var(--ink-muted)] sm:text-left">
+                    {p.client}
+                  </span>
+                )}
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* Featured projects */}
-      <section className="amoud-container py-16">
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
-          <Reveal>
-            <span className="eyebrow mb-4">نمونه کارها</span>
-            <h2 className="text-3xl sm:text-4xl font-black text-[var(--ink)]">
-              پروژه‌های <span className="text-gradient-gold">شاخص</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={100}>
-            <Link
-              href="/contracting-projects"
-              className="btn btn-ghost !py-2.5"
-            >
-              همهٔ پروژه‌ها
-              <ArrowLeft className="w-4 h-4" />
-            </Link>
-          </Reveal>
-        </div>
-        <FeaturedProjects />
-      </section>
-
-      {/* Values / why us */}
-      <section className="relative py-16 mt-8 border-y border-[var(--line)] bg-[#0c0c10] bg-grid">
+      {/* Vision / values / mission */}
+      <section className="relative mt-8 border-y border-[var(--line)] bg-[#0c0c10] bg-grid py-16">
         <div className="amoud-container">
-          <Reveal className="text-center max-w-2xl mx-auto mb-14">
+          <Reveal className="mx-auto mb-14 max-w-2xl text-center">
             <span className="eyebrow justify-center mb-4">چرا آمود؟</span>
-            <h2 className="text-3xl sm:text-4xl font-black text-[var(--ink)]">
-              دلایل <span className="text-gradient-gold">اعتماد</span> به ما
+            <h2 className="text-3xl font-black text-[var(--ink)] sm:text-4xl">
+              چشم‌انداز و <span className="text-gradient-gold">ارزش‌ها</span>
             </h2>
           </Reveal>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map((v, i) => (
+          <div className="grid gap-6 md:grid-cols-3">
+            {principles.map((v, i) => (
               <Reveal key={v.title} delay={i * 80}>
                 <div className="h-full rounded-3xl border border-[var(--line)] bg-[var(--surface)]/60 p-8 text-center">
                   <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-[var(--gold)]/30 text-[var(--gold)]">
@@ -271,7 +255,7 @@ export default function HomeView({
                     {v.title}
                   </h3>
                   <p className="mt-3 text-sm leading-7 text-[var(--ink-muted)]">
-                    {v.desc}
+                    {v.text}
                   </p>
                 </div>
               </Reveal>
@@ -287,21 +271,21 @@ export default function HomeView({
       {/* CTA */}
       <section className="amoud-container py-20">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[2rem] border border-[var(--gold)]/25 bg-gradient-to-br from-[#16130c] via-[var(--surface)] to-[#0d0d10] p-10 sm:p-16 text-center">
+          <div className="relative overflow-hidden rounded-[2rem] border border-[var(--gold)]/25 bg-gradient-to-br from-[#16130c] via-[var(--surface)] to-[#0d0d10] p-10 text-center sm:p-16">
             <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[var(--gold-glow)] blur-3xl" />
             <div className="relative">
-              <h2 className="text-3xl sm:text-5xl font-black text-[var(--ink)]">
-                آمادهٔ شروع{" "}
-                <span className="text-gradient-gold">همکاری</span> هستید؟
+              <h2 className="text-3xl font-black text-[var(--ink)] sm:text-5xl">
+                پروژه‌ای در{" "}
+                <span className="text-gradient-gold">دست دارید؟</span>
               </h2>
               <p className="mx-auto mt-5 max-w-xl leading-8 text-[var(--ink-soft)]">
-                برای مشاوره، اطلاع از شرایط فروش و بررسی پروژه‌ها با کارشناسان ما
-                در ارتباط باشید.
+                برای مشاوره، بررسی پروژه و دریافت پیشنهاد اجرای تاسیسات با
+                کارشناسان ما در ارتباط باشید.
               </p>
               <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-                <a href="tel:+989123505524" className="btn btn-gold">
-                  <Phone className="w-4 h-4" />
-                  تماس با واحد فروش
+                <a href={contact.officeHref} className="btn btn-gold">
+                  <Phone className="h-4 w-4" />
+                  {contact.office}
                 </a>
                 <Link href="/contact" className="btn btn-ghost">
                   راه‌های ارتباطی

@@ -1,26 +1,15 @@
 "use client";
+import Link from "next/link";
+import { Target, Eye, Gem, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import Link from "next/link";
-import { Target, Eye, Leaf, ArrowLeft } from "lucide-react";
+import { company, stats, services } from "@/data/company";
 
 const pillars = [
-  {
-    icon: Target,
-    title: "مأموریت ما",
-    desc: "ارائهٔ خدمات پیمانکاری و ساختمانی در بالاترین سطح استانداردهای بین‌المللی، همراه با نوآوری و رعایت اصول پایداری.",
-  },
-  {
-    icon: Eye,
-    title: "چشم‌انداز ما",
-    desc: "تبدیل‌شدن به یکی از برترین شرکت‌های پیمانکاری و ساختمانی منطقه و ارائهٔ الگویی از تعهد، تخصص و نوآوری.",
-  },
-  {
-    icon: Leaf,
-    title: "توسعهٔ پایدار",
-    desc: "پایبندی به اصول پایداری و توسعهٔ سبز در تمام مراحل طراحی و اجرای پروژه‌ها.",
-  },
+  { icon: Eye, title: "چشم‌انداز", desc: company.vision },
+  { icon: Gem, title: "ارزش‌های محوری", desc: company.values },
+  { icon: Target, title: "مأموریت", desc: company.mission },
 ];
 
 export default function About() {
@@ -29,62 +18,61 @@ export default function About() {
       <Navbar />
       <main className="flex-grow">
         {/* Header */}
-        <section className="relative pt-36 pb-16 bg-grid border-b border-[var(--line)]">
+        <section className="relative border-b border-[var(--line)] bg-grid pb-16 pt-36">
           <div className="amoud-container text-center">
             <Reveal>
               <span className="eyebrow justify-center mb-5">
-                آمود گستر آتیه
+                {company.nameFa}
               </span>
-              <h1 className="text-4xl sm:text-5xl font-black text-[var(--ink)]">
+              <h1 className="text-4xl font-black text-[var(--ink)] sm:text-5xl">
                 دربارهٔ <span className="text-gradient-gold">ما</span>
               </h1>
               <p className="mx-auto mt-5 max-w-2xl leading-8 text-[var(--ink-muted)]">
-                تخصص، تعهد و نوآوری در صنعت ساختمان از سال ۱۳۸۰
+                {company.tagline} — از سال ۱۳۸۰
               </p>
             </Reveal>
           </div>
         </section>
 
-        {/* Body */}
+        {/* Intro */}
         <section className="amoud-container py-16">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <Reveal>
-              <div className="overflow-hidden rounded-3xl border border-[var(--line)] aspect-[4/3]">
+              <div className="aspect-[4/3] overflow-hidden rounded-3xl border border-[var(--line)]">
                 <img
                   src="/projects/Aseman-alborz.jpg"
-                  alt="پروژه‌های آمود"
+                  alt="پروژه‌های آمود گستر آتیه"
                   className="h-full w-full object-cover"
                 />
               </div>
             </Reveal>
             <Reveal delay={120}>
-              <div className="space-y-5 leading-8 text-[var(--ink-soft)]">
-                <p>
-                  شرکت{" "}
-                  <span className="font-bold text-[var(--gold)]">
-                    آمودگسترآتیه
-                  </span>{" "}
-                  با سال‌ها تجربه در زمینهٔ اجرای پروژه‌های ساختمانی، تأسیسات
-                  الکتریکال و مکانیکال، و پیمانکاری در پروژه‌های بزرگ ملی و
-                  منطقه‌ای فعالیت می‌کند. این شرکت با بهره‌گیری از نیروهای متخصص
-                  و فناوری‌های روز، همواره در تلاش است بهترین کیفیت و بالاترین
-                  استانداردها را ارائه دهد.
-                </p>
-                <p className="text-[var(--ink-muted)]">
-                  رزومهٔ کاری آمودگسترآتیه شامل اجرای پروژه‌های مسکونی، برج‌های
-                  اداری، پروژه‌های صنعتی و تأسیسات زیربنایی است. ما با تمرکز بر
-                  مدیریت زمان، کیفیت و هزینه، توانسته‌ایم اعتماد کارفرمایان بزرگ و
-                  معتبر کشور را جلب کنیم.
-                </p>
+              <h2 className="text-2xl font-black text-[var(--ink)] sm:text-3xl">
+                معرفی شرکت
+              </h2>
+              <p className="mt-5 leading-9 text-[var(--ink-soft)]">
+                {company.intro}
+              </p>
+              <div className="mt-8 grid grid-cols-3 gap-4 border-t border-[var(--line)] pt-7">
+                {stats.map((s) => (
+                  <div key={s.label}>
+                    <div className="display-en text-2xl font-black text-gradient-gold sm:text-3xl">
+                      {s.value}
+                    </div>
+                    <div className="mt-1 text-xs text-[var(--ink-muted)]">
+                      {s.label}
+                    </div>
+                  </div>
+                ))}
               </div>
             </Reveal>
           </div>
 
-          {/* Pillars */}
+          {/* Vision / values / mission */}
           <div className="mt-16 grid gap-6 md:grid-cols-3">
             {pillars.map((p, i) => (
               <Reveal key={p.title} delay={i * 90}>
-                <div className="card h-full p-8">
+                <div className="card h-full rounded-3xl p-8">
                   <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--gold-glow)] text-[var(--gold)]">
                     <p.icon className="h-7 w-7" strokeWidth={1.6} />
                   </div>
@@ -99,10 +87,26 @@ export default function About() {
             ))}
           </div>
 
+          {/* Services summary */}
+          <div className="mt-16 grid gap-6 lg:grid-cols-2">
+            {services.map((s, i) => (
+              <Reveal key={s.slug} delay={i * 90}>
+                <div className="card h-full rounded-3xl p-8">
+                  <h3 className="text-xl font-bold text-[var(--gold)]">
+                    {s.title}
+                  </h3>
+                  <p className="mt-4 leading-8 text-[var(--ink-soft)]">
+                    {s.desc}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
           <Reveal className="mt-14 text-center">
             <Link href="/contracting-projects" className="btn btn-gold">
               مشاهدهٔ پروژه‌ها
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="h-4 w-4" />
             </Link>
           </Reveal>
         </section>

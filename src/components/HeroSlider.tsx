@@ -98,16 +98,15 @@ export default function HeroSlider() {
             className="eyebrow mb-6 opacity-0 animate-[fadeUp_.7s_ease_forwards]"
             style={{ animationDelay: "0.1s" }}
           >
-            آمود گستر آتیه · از سال ۱۳۸۰
+            شرکت آمود گستر آتیه · از سال ۱۳۸۰
           </span>
 
           <h1
             className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.2] text-[var(--ink)] opacity-0 animate-[fadeUp_.7s_ease_forwards]"
             style={{ animationDelay: "0.25s" }}
           >
-            پیمانکاری ساختمان و
+            مجری تخصصی
             <br />
-            اجرای{" "}
             <span className="text-gradient-gold">
               تاسیسات الکتریکال و مکانیکال
             </span>
@@ -117,9 +116,9 @@ export default function HeroSlider() {
             className="mt-6 max-w-xl text-base sm:text-lg leading-8 text-[var(--ink-soft)] opacity-0 animate-[fadeUp_.7s_ease_forwards]"
             style={{ animationDelay: "0.4s" }}
           >
-            شرکت آمود گستر آتیه، پیمانکار و سازنده ساختمان از سال ۱۳۸۰؛ مشارکت
-            در ساخت، ساختمان‌سازی و اجرای تاسیسات برق و مکانیک پروژه‌های مسکونی،
-            تجاری، اداری و بیمارستانی.
+            اجرای تاسیسات پروژه‌های مسکونی، اداری، تجاری، بیمارستانی و برج‌های
+            بلندمرتبه — از سال ۱۳۸۰ و با کارنامه‌ای بیش از ۲۵ پروژه و ۶۰۰ هزار
+            مترمربع زیربنا.
           </p>
 
           <div
