@@ -3,7 +3,7 @@ import "./globals.css";
 import { Vazirmatn } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import PageTransition from "@/components/PageTransition";
-import { KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { KEYWORDS, OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/thumbs";
@@ -16,9 +16,9 @@ const vazir = Vazirmatn({
 });
 
 const DEFAULT_TITLE =
-  "آمود گستر آتیه | پیمانکاری ساختمان و تاسیسات الکتریکال و مکانیکال";
+  "آمود گستر آتیه | مجری تخصصی تاسیسات الکتریکال و مکانیکال";
 const DEFAULT_DESC =
-  "شرکت آمود گستر آتیه؛ پیمانکار و سازنده ساختمان از سال ۱۳۸۰. مشارکت در ساخت، ساختمان‌سازی و اجرای تاسیسات الکتریکال و مکانیکال، موتورخانه و تابلو برق.";
+  "شرکت آمود گستر آتیه؛ مجری تخصصی تاسیسات الکتریکال و مکانیکال از سال ۱۳۸۰. اجرای تاسیسات پروژه‌های مسکونی، اداری، تجاری، بیمارستانی و برج‌های بلندمرتبه — بیش از ۲۵ پروژه و ۶۰۰ هزار مترمربع زیربنا.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: SITE_NAME,
     images: [
-      { url: "/brand/logo.png", width: 1200, height: 630, alt: SITE_NAME },
+      { url: OG_IMAGE, width: 1200, height: 630, alt: SITE_NAME },
     ],
     locale: "fa_IR",
     type: "website",
@@ -56,7 +56,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: DEFAULT_TITLE,
     description: DEFAULT_DESC,
-    images: ["/brand/logo.png"],
+    images: [OG_IMAGE],
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: process.env.NEXT_PUBLIC_ENAMAD_VERIFICATION
+      ? { enamad: process.env.NEXT_PUBLIC_ENAMAD_VERIFICATION }
+      : undefined,
   },
   robots: {
     index: true,

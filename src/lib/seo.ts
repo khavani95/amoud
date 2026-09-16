@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 export const SITE_URL = "https://amoud-co.ir";
 export const SITE_NAME = "آمود گستر آتیه";
+/** 1200×630 social banner (public/brand/og-cover.png). */
+export const OG_IMAGE = "/brand/og-cover.png";
 
 export const ORG = {
   legalName: "شرکت آمود گستر آتیه",
@@ -67,7 +69,7 @@ export function pageMetadata({
   description,
   path,
   keywords,
-  image = "/brand/logo.png",
+  image = OG_IMAGE,
 }: PageSeo): Metadata {
   const url = `${SITE_URL}${path}`;
   // Child titles omit the brand (the root layout's template appends it), but

@@ -14,7 +14,6 @@ const projectLinks = [
 const trailingLinks = [
   { href: "/blog", label: "مقالات" },
   { href: "/about", label: "درباره ما" },
-  { href: "/sale", label: "واحد فروش" },
   { href: "/contact", label: "تماس با ما" },
 ];
 

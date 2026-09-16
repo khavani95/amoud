@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import type { Block } from "@/data/articles";
 
 /** Renders an article's structured blocks as semantic HTML. */
@@ -63,6 +65,34 @@ export default function ArticleBody({ blocks }: { blocks: Block[] }) {
                 {b.text}
               </aside>
             );
+          case "linkout": {
+            const cls =
+              "btn btn-gold mt-5 !py-2.5 !text-sm";
+            return (
+              <aside
+                key={i}
+                className="rounded-2xl border border-[var(--gold)]/30 bg-[var(--surface-2)] p-6"
+              >
+                <p className="leading-8 text-[var(--ink-soft)]">{b.text}</p>
+                {b.external ? (
+                  <a
+                    href={b.href}
+                    target="_blank"
+                    rel="noopener"
+                    className={cls}
+                  >
+                    {b.label}
+                    <ArrowLeft className="h-4 w-4" />
+                  </a>
+                ) : (
+                  <Link href={b.href} className={cls}>
+                    {b.label}
+                    <ArrowLeft className="h-4 w-4" />
+                  </Link>
+                )}
+              </aside>
+            );
+          }
           case "table":
             return (
               <div key={i} className="overflow-x-auto">

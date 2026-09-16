@@ -2,31 +2,40 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import { MapPin, Phone, Smartphone, Mail } from "lucide-react";
+import { MapPin, Phone, Smartphone, Mail, Globe } from "lucide-react";
+import { contact } from "@/data/company";
 
 const items = [
   {
     icon: Phone,
-    title: "تلفن ثابت",
-    value: "021-44711222",
-    href: "tel:+982144711222",
+    title: contact.officeLabel,
+    value: contact.office,
+    href: contact.officeHref,
   },
   {
     icon: Smartphone,
-    title: "موبایل",
-    value: "+98 912 350 5524",
-    href: "tel:+989123505524",
+    title: contact.ceoLabel,
+    value: contact.ceo,
+    href: contact.ceoHref,
   },
   {
     icon: Mail,
     title: "ایمیل",
-    value: "AmudGostar.Co@Gmail.com",
-    href: "mailto:AmudGostar.Co@Gmail.com",
+    value: contact.email,
+    href: `mailto:${contact.email}`,
+    ltr: true,
+  },
+  {
+    icon: Globe,
+    title: "وب‌سایت",
+    value: contact.site,
+    href: "https://amoud-co.ir",
+    ltr: true,
   },
   {
     icon: MapPin,
-    title: "نشانی",
-    value: "تهران، شهرک گلستان، بلوار امیرکبیر، بلوار هاشم‌زاده، رز ۲",
+    title: "نشانی دفتر مرکزی",
+    value: contact.address,
     href: null,
   },
 ];
@@ -64,7 +73,7 @@ export default function Contact() {
                     </div>
                     <div
                       className="mt-1 text-lg font-bold text-[var(--ink)]"
-                      dir={it.icon === MapPin ? "rtl" : "ltr"}
+                      dir={it.ltr ? "ltr" : "rtl"}
                     >
                       {it.value}
                     </div>

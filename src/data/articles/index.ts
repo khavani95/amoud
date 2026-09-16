@@ -1,11 +1,12 @@
 import type { Article } from "./types";
 import { guides } from "./guides";
 import { projectArticles } from "./projects";
+import { financeArticles } from "./finance";
 
 export type { Article, Block } from "./types";
 
 /** All articles, newest first. */
-export const articles: Article[] = [...guides, ...projectArticles].sort(
+export const articles: Article[] = [...guides, ...projectArticles, ...financeArticles].sort(
   (a, b) => +new Date(b.date) - +new Date(a.date)
 );
 

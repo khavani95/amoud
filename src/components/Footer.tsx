@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { MapPin, Phone, Mail, Smartphone, ArrowUp } from "lucide-react";
+import { company, contact } from "@/data/company";
 
 export default function Footer() {
   return (
@@ -21,8 +22,8 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm leading-7 text-[var(--ink-muted)] max-w-xs">
-              مشارکت و اجرای پروژه‌های مسکونی، تجاری، اداری و بیمارستانی؛
-              متخصص تأسیسات برق و مکانیک از سال ۱۳۸۰.
+              {company.tagline} — اجرای تاسیسات پروژه‌های مسکونی، اداری،
+              تجاری، بیمارستانی و برج‌های بلندمرتبه از سال ۱۳۸۰.
             </p>
           </div>
 
@@ -36,7 +37,6 @@ export default function Footer() {
                 { href: "/", label: "خانه" },
                 { href: "/about", label: "درباره ما" },
                 { href: "/blog", label: "مقالات" },
-                { href: "/sale", label: "واحد فروش" },
                 { href: "/contact", label: "تماس با ما" },
               ].map((l) => (
                 <li key={l.href}>
@@ -86,25 +86,21 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[var(--gold)] mt-1 shrink-0" />
                 <span className="leading-6">
-                  تهران، شهرک گلستان، بلوار امیرکبیر، بلوار هاشم‌زاده، رز ۲
+                  {contact.address}
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[var(--gold)] shrink-0" />
-                <a href="tel:+982144711222" dir="ltr">
-                  021-44711222
-                </a>
+                <a href={contact.officeHref}>{contact.office}</a>
               </li>
               <li className="flex items-center gap-3">
                 <Smartphone className="w-4 h-4 text-[var(--gold)] shrink-0" />
-                <a href="tel:+989123505524" dir="ltr">
-                  +98 912 350 5524
-                </a>
+                <a href={contact.ceoHref}>{contact.ceo}</a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[var(--gold)] shrink-0" />
-                <a href="mailto:AmudGostar.Co@Gmail.com" dir="ltr">
-                  AmudGostar.Co@Gmail.com
+                <a href={`mailto:${contact.email}`} dir="ltr">
+                  {contact.email}
                 </a>
               </li>
             </ul>

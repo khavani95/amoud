@@ -5,6 +5,13 @@ export type Block =
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
   | { type: "note"; text: string }
+  | {
+      type: "linkout";
+      text: string;
+      href: string;
+      label: string;
+      external?: boolean;
+    }
   | { type: "table"; head: string[]; rows: string[][] };
 
 export interface Article {
@@ -28,5 +35,5 @@ export interface Article {
   /** Slugs of related articles. */
   related: string[];
   /** Internal links surfaced in the closing CTA. */
-  links?: { label: string; href: string }[];
+  links?: { label: string; href: string; external?: boolean }[];
 }
