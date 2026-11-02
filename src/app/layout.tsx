@@ -60,9 +60,13 @@ export const metadata: Metadata = {
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-    other: process.env.NEXT_PUBLIC_ENAMAD_VERIFICATION
-      ? { enamad: process.env.NEXT_PUBLIC_ENAMAD_VERIFICATION }
-      : undefined,
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
+    other: Object.fromEntries(
+      Object.entries({
+        "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION,
+        enamad: process.env.NEXT_PUBLIC_ENAMAD_VERIFICATION,
+      }).filter((e): e is [string, string] => Boolean(e[1]))
+    ),
   },
   robots: {
     index: true,

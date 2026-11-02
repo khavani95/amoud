@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
-export const SITE_URL = "https://amoud-co.ir";
+/** Canonical origin — the apex 308-redirects here, so every URL must use www. */
+export const SITE_URL = "https://www.amoud-co.ir";
 export const SITE_NAME = "آمود گستر آتیه";
 /** 1200×630 social banner (public/brand/og-cover.png). */
 export const OG_IMAGE = "/brand/og-cover.png";

@@ -29,7 +29,7 @@ const items = [
     icon: Globe,
     title: "وب‌سایت",
     value: contact.site,
-    href: "https://amoud-co.ir",
+    href: "https://www.amoud-co.ir",
     ltr: true,
   },
   {
