@@ -9,13 +9,12 @@ import { pageMetadata, SITE_URL } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "مقالات — راهنمای پیمانکاری، مشارکت در ساخت و تاسیسات",
   description:
-    "مقالات تخصصی آمود گستر آتیه: راهنمای مشارکت در ساخت، اجرای تاسیسات الکتریکال و مکانیکال، موتورخانه، انتخاب پیمانکار ساختمان و معرفی پروژه‌های شاخص.",
+    "مقالات تخصصی آمود گستر آتیه: راهنمای مشارکت در ساخت، اجرای تاسیسات الکتریکال و مکانیکال، موتورخانه، انتخاب پیمانکار ساختمان و مدیریت مالی پروژه‌های پیمانکاری.",
   path: "/blog",
 });
 
 export default function BlogIndex() {
   const guides = articlesByCategory("راهنما");
-  const projects = articlesByCategory("پروژه");
 
   return (
     <div className="flex min-h-screen flex-col bg-[var(--bg)]">
@@ -49,22 +48,13 @@ export default function BlogIndex() {
             </h1>
             <p className="mx-auto mt-5 max-w-2xl leading-8 text-[var(--ink-muted)]">
               راهنمای مشارکت در ساخت، اجرای تاسیسات الکتریکال و مکانیکال،
-              موتورخانه و انتخاب پیمانکار — به‌همراه معرفی پروژه‌های شاخص آمود
-              گستر آتیه.
+              موتورخانه، انتخاب پیمانکار و مدیریت مالی پروژه — از تجربه اجرایی
+              آمود گستر آتیه.
             </p>
           </div>
         </section>
 
-        <Section
-          title="راهنماهای تخصصی"
-          eyebrow="آموزش"
-          items={guides}
-        />
-        <Section
-          title="پروژه‌های شاخص"
-          eyebrow="نمونه کار"
-          items={projects}
-        />
+        <Section title="راهنماهای تخصصی" eyebrow="آموزش" items={guides} />
 
         <section className="amoud-container pb-20">
           <div className="rounded-[2rem] border border-[var(--gold)]/25 bg-gradient-to-br from-[#16130c] via-[var(--surface)] to-[#0d0d10] p-10 text-center sm:p-14">
