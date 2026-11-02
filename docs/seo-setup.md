@@ -1,36 +1,64 @@
-# راه‌اندازی سئو — کارهایی که به حساب گوگل نیاز دارد
+# راه‌اندازی سئو — کارهایی که به حساب مالک سایت نیاز دارد
 
-این موارد از داخل کدبیس قابل انجام نیستند و باید یک‌بار توسط مالک سایت انجام شوند.
+دامنه اصلی (canonical) سایت **`https://www.amoud-co.ir`** است؛ نسخه بدون www
+با 308 به آن منتقل می‌شود. در همه سرویس‌ها همین آدرس را وارد کنید.
 
-## ۱. Google Search Console
+## ۱. Google Search Console (اولویت اول)
 
-۱. به <https://search.google.com/search-console> بروید و property از نوع
-   **URL prefix** با آدرس `https://amoud-co.ir` بسازید.
-۲. روش تأیید **HTML tag** را انتخاب کنید. گوگل رشته‌ای مثل
-   `content="AbC123..."` می‌دهد؛ فقط همان مقدار داخل `content` را بردارید.
-۳. آن را به‌عنوان متغیر محیطی روی سرور (لیارا/ورسل) ست کنید:
+بهترین روش، property از نوع **Domain** است؛ هر دو نسخه www و بدون www و
+http/https را یک‌جا پوشش می‌دهد.
+
+۱. به <https://search.google.com/search-console> بروید ← **Add property** ←
+   ستون چپ **Domain** ← عبارت `amoud-co.ir` را وارد کنید.
+۲. گوگل یک رکورد TXT مثل `google-site-verification=AbC123...` می‌دهد.
+۳. DNS دامنه روی ورسل است: یا رکورد را در Vercel ← Domains ← amoud-co.ir ←
+   DNS Records با نوع `TXT`، نام `@` اضافه کنید، یا مقدار را برای توسعه‌دهنده
+   بفرستید تا از طریق API اضافه شود.
+۴. چند دقیقه بعد در Search Console روی **Verify** بزنید.
+۵. از منوی **Sitemaps** این آدرس را ثبت کنید:
 
    ```
-   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=AbC123...
+   https://www.amoud-co.ir/sitemap.xml
    ```
 
-۴. دیپلوی کنید و در Search Console روی **Verify** بزنید.
-۵. از منوی **Sitemaps** آدرس زیر را ثبت کنید:
+۶. با **URL Inspection** آدرس صفحه اصلی و چند صفحه مهم
+   (`/contracting-projects`، `/blog`) را بررسی و «Request indexing» بزنید.
 
-   ```
-   https://amoud-co.ir/sitemap.xml
-   ```
+> روش جایگزین (URL prefix + HTML tag): مقدار `content` را در متغیر محیطی
+> `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` روی ورسل بگذارید و دوباره دیپلوی کنید.
 
-۶. با **URL Inspection** آدرس `https://amoud-co.ir/` را ثبت و
-   «Request indexing» بزنید تا ایندکس اولیه سریع‌تر انجام شود.
+## ۲. Bing Webmaster Tools (برای ChatGPT و Copilot)
 
-> نکته: تگ تأیید از `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` خوانده می‌شود
-> (`src/app/layout.tsx`). اگر متغیر ست نشود، هیچ تگی رندر نمی‌شود و
-> چیزی خراب نمی‌شود.
+جستجوی ChatGPT و Copilot عمدتاً از ایندکس Bing استفاده می‌کنند، پس ثبت در
+Bing برای دیده‌شدن در هوش مصنوعی‌ها مهم است.
 
-## ۲. Google Business Profile
+۱. به <https://www.bing.com/webmasters> بروید و با حساب گوگل وارد شوید.
+۲. گزینه **Import from Google Search Console** را بزنید — سایت و sitemap
+   خودکار منتقل و تأیید می‌شوند (ابتدا مرحله ۱ را کامل کنید).
+۳. در غیر این صورت روش meta tag را انتخاب کنید و مقدار `content` را در
+   `NEXT_PUBLIC_BING_VERIFICATION` روی ورسل بگذارید.
 
-برای کوئری‌های محلی مثل «پیمانکار تاسیسات تهران» مؤثرترین اقدام است.
+## ۳. Yandex Webmaster (اختیاری)
+
+در <https://webmaster.yandex.com> سایت را اضافه کنید، روش meta tag را بزنید و
+مقدار را در `NEXT_PUBLIC_YANDEX_VERIFICATION` بگذارید.
+
+## ۴. IndexNow — اطلاع فوری تغییرات
+
+پس از هر انتشار مقاله یا تغییر مهم، این دستور را اجرا کنید تا Bing، Yandex و
+سایر موتورهای عضو IndexNow ظرف چند دقیقه صفحات را دوباره بخزند:
+
+```bash
+node scripts/indexnow.mjs              # همه آدرس‌های sitemap
+node scripts/indexnow.mjs /blog/slug   # فقط صفحات مشخص
+```
+
+فایل کلید در `public/c4444e1bec2dc7f2496af49b5c8d701f.txt` است؛ حذفش نکنید.
+
+## ۵. Google Business Profile
+
+برای کوئری‌های محلی مثل «پیمانکار تاسیسات تهران» مؤثرترین اقدام است و
+Gemini و Google Maps هم از آن استفاده می‌کنند.
 
 ۱. در <https://business.google.com> کسب‌وکار را ثبت کنید.
 ۲. اطلاعات را **دقیقاً** مطابق سایت وارد کنید — ناهماهنگی نام، آدرس و تلفن
@@ -43,30 +71,30 @@
    | دسته‌های فرعی | پیمانکار برق، پیمانکار تاسیسات مکانیکی |
    | تلفن | ۰۲۱-۴۴۷۱۱۲۲۲ |
    | آدرس | تهران، شهرک گلستان، بلوار امیرکبیر، بلوار هاشم‌زاده، رز ۲، پلاک ۲۵، واحد ۲ |
-   | وب‌سایت | https://amoud-co.ir |
+   | وب‌سایت | https://www.amoud-co.ir |
 
-۳. تأیید آدرس معمولاً با کارت‌پستال یا تماس تلفنی انجام می‌شود.
-۴. پس از تأیید: عکس پروژه‌ها را آپلود کنید و از مشتریان قبلی نظر بگیرید.
+۳. تأیید آدرس معمولاً با کارت‌پستال، ویدیو یا تماس تلفنی انجام می‌شود.
+۴. پس از تأیید: عکس پروژه‌ها را آپلود کنید و از کارفرمایان قبلی نظر بگیرید.
 
-## ۳. مختصات دقیق دفتر
+## ۶. مختصات دقیق دفتر
 
-در `src/lib/seo.ts` مقدار `ORG.geo` فعلاً **مختصات تقریبی شهرک گلستان** است:
+در `src/lib/seo.ts` مقدار `ORG.geo` فعلاً **مختصات تقریبی شهرک گلستان** است.
+در Google Maps روی محل دقیق دفتر راست‌کلیک کنید، دو عدد بالای منو را کپی و
+جایگزین کنید. این مقدار در اسکیمای LocalBusiness استفاده می‌شود.
 
-```ts
-geo: { lat: 35.7219, lng: 51.1889 }
-```
+## ۷. مواردی که در کد انجام شده‌اند
 
-برای اصلاح: در Google Maps روی محل دقیق دفتر راست‌کلیک کنید، دو عدد بالای
-منو را کپی و جایگزین کنید. این مقدار در اسکیمای LocalBusiness استفاده می‌شود.
-
-## ۴. مواردی که در کد انجام شده‌اند
-
-- عکس OG اختصاصی ۱۲۰۰×۶۳۰ در `public/brand/og-cover.png`
-- `sitemap.xml` و `robots.txt` داینامیک
-- متادیتا، canonical، OpenGraph و Twitter card برای همه صفحات
+- `robots.txt` با اجازه صریح به خزنده‌های موتورهای جستجو و هوش مصنوعی
+  (GPTBot، OAI-SearchBot، ClaudeBot، PerplexityBot، Google-Extended و …)
+- `llms.txt` (خلاصه سایت برای هوش مصنوعی) و `llms-full.txt` (متن کامل
+  مقالات و پرسش‌های متداول) — خودکار از داده‌های سایت ساخته می‌شوند
+- `sitemap.xml` شامل همه صفحات و مقالات
+- canonical، OpenGraph و Twitter card برای همه صفحات، روی دامنه www
 - اسکیمای Organization / LocalBusiness / GeneralContractor، WebSite،
   BreadcrumbList، FAQPage و BlogPosting
-- بلاگ با مقالات کلیدواژه‌محور و لینک‌دهی داخلی
+- تگ‌های تأیید گوگل، Bing و Yandex از طریق متغیرهای محیطی
+- کلید و اسکریپت IndexNow
+- عکس OG اختصاصی ۱۲۰۰×۶۳۰ در `public/brand/og-cover.png`
 
 ## بازسازی عکس OG
 
