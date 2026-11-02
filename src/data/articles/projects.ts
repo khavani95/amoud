@@ -96,6 +96,8 @@ export const projectArticles: Article[] = [
     category: "پروژه",
     date: "2026-09-10",
     readingMinutes: 5,
+    cover: "/projects/sarvenaz.jpg",
+    coverAlt: "مجتمع مسکونی سروناز",
     facts: [
       { label: "کاربری", value: "مسکونی — ۱۲ بلوک" },
       { label: "متراژ", value: "۱۲۰٬۰۰۰ مترمربع" },
@@ -164,6 +166,8 @@ export const projectArticles: Article[] = [
     category: "پروژه",
     date: "2026-09-08",
     readingMinutes: 5,
+    cover: "/projects/jam-khalij-fars.jpg",
+    coverAlt: "مجتمع اداری و تجاری جام خلیج فارس",
     facts: [
       { label: "کاربری", value: "اداری و تجاری" },
       { label: "متراژ", value: "بیش از ۱۱۰٬۰۰۰ مترمربع" },
@@ -228,6 +232,8 @@ export const projectArticles: Article[] = [
     category: "پروژه",
     date: "2026-09-06",
     readingMinutes: 5,
+    cover: "/projects/muze-javaherat.png",
+    coverAlt: "باغ‌موزه جواهرات ملی بانک مرکزی ایران",
     facts: [
       { label: "کاربری", value: "فرهنگی — باغ‌موزه" },
       { label: "متراژ", value: "بیش از ۵۰٬۰۰۰ مترمربع" },
@@ -362,6 +368,8 @@ export const projectArticles: Article[] = [
     category: "پروژه",
     date: "2026-09-02",
     readingMinutes: 5,
+    cover: "/projects/ofogh-ekbatan-maskoni.png",
+    coverAlt: "مجتمع ۱۴۰۰ واحدی افق اکباتان",
     facts: [
       { label: "کاربری", value: "مسکونی و تجاری" },
       {
@@ -485,7 +493,7 @@ export const projectArticles: Article[] = [
     category: "پروژه",
     date: "2026-08-28",
     readingMinutes: 4,
-    cover: "/projects/Yas-Residential-Towers.webp",
+    cover: "/projects/hemmat-yas.jpg",
     coverAlt: "برج‌های دوقلوی همت یاس ۲",
     facts: [
       { label: "کاربری", value: "مسکونی — برج‌های دوقلو" },

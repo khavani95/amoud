@@ -175,13 +175,6 @@ export const featuredProjects: FeaturedProject[] = [
     images: ["/projects/sarvenaz.jpg"],
     article: "mojtame-sarvenaz",
   },
-  {
-    id: "amoud-6",
-    title: "شهرک ویلایی آمود ۶",
-    desc: "طراحی و اجرای شهرک ویلایی آمود ۶، واقع در منطقه کته‌پشت شهرستان آمل.",
-    client: "بخش خصوصی",
-    images: [],
-  },
 ];
 
 export interface OtherProject {
@@ -212,18 +205,60 @@ export const otherProjects: OtherProject[] = [
     title: "پروژه مسکونی ارغوان — ۷ بلوک، مجموعاً ۱۲۸ واحد",
     client: "تعاونی مسکن طلوع فجر",
   },
+];
+
+/**
+ * The company's own design-and-build work, from the construction résumé.
+ * Kept separate from the contracting record so each project page can show
+ * the side of the business it belongs to.
+ */
+export const constructionProjects: FeaturedProject[] = [
   {
-    title:
-      "طراحی و ساخت ساختمان مسکونی آمود ۵ — شهرک سروآزاد، منطقه ۲۲ تهران",
+    id: "amoud-6",
+    title: "شهرک ویلایی آمود ۶",
+    desc: "طراحی و اجرای شهرک ویلایی آمود ۶، واقع در منطقه کته‌پشت شهرستان آمل.",
+    client: "بخش خصوصی",
+    area: "شهرک ویلایی",
+    images: [],
   },
   {
-    title: "طراحی و ساخت ساختمان مسکونی آمود ۴ — خیابان شاهین، منطقه ۵ تهران",
+    id: "amoud-5",
+    title: "ساختمان مسکونی آمود ۵",
+    desc: "طراحی و ساخت ساختمان مسکونی آمود ۵، واقع در شهرک سروآزاد، منطقه ۲۲ تهران.",
+    client: "طراحی و ساخت — آمود گستر آتیه",
+    area: "مسکونی",
+    images: [],
   },
-  { title: "طراحی و ساخت ویلای آمود ۳ — حربده، شهرستان محمودآباد" },
   {
-    title: "طراحی و ساخت ساختمان مسکونی آمود ۲ — شهرک گلستان، منطقه ۲۲ تهران",
+    id: "amoud-4",
+    title: "ساختمان مسکونی آمود ۴",
+    desc: "طراحی و ساخت ساختمان مسکونی آمود ۴، واقع در خیابان شاهین، منطقه ۵ تهران.",
+    client: "طراحی و ساخت — آمود گستر آتیه",
+    area: "مسکونی",
+    images: [],
   },
   {
-    title: "طراحی و ساخت ساختمان مسکونی آمود ۱ — شهرک گلستان، منطقه ۲۲ تهران",
+    id: "amoud-3",
+    title: "ویلای آمود ۳",
+    desc: "طراحی و ساخت ویلای آمود ۳، واقع در حربده، شهرستان محمودآباد.",
+    client: "طراحی و ساخت — آمود گستر آتیه",
+    area: "ویلایی",
+    images: [],
+  },
+  {
+    id: "amoud-2",
+    title: "ساختمان مسکونی آمود ۲",
+    desc: "طراحی و ساخت ساختمان مسکونی آمود ۲، واقع در شهرک گلستان، منطقه ۲۲ تهران.",
+    client: "طراحی و ساخت — آمود گستر آتیه",
+    area: "مسکونی",
+    images: [],
+  },
+  {
+    id: "amoud-1",
+    title: "ساختمان مسکونی آمود ۱",
+    desc: "طراحی و ساخت ساختمان مسکونی آمود ۱، واقع در شهرک گلستان، منطقه ۲۲ تهران.",
+    client: "طراحی و ساخت — آمود گستر آتیه",
+    area: "مسکونی",
+    images: [],
   },
 ];

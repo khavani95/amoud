@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import ArticleCard from "./ArticleCard";
-import { articles } from "@/data/articles";
+import { articlesByCategory } from "@/data/articles";
 
 /** Latest three articles on the homepage — internal links into the blog. */
 export default function LatestArticles() {
-  const latest = articles.slice(0, 3);
+  const latest = articlesByCategory("راهنما").slice(0, 3);
   if (!latest.length) return null;
 
   return (
