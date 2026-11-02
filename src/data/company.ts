@@ -75,8 +75,8 @@ export const services = [
  * service lines rather than alongside them.
  */
 export const secondaryService = {
-  title: "مشارکت در ساخت",
-  desc: "آمود گستر آتیه در کنار فعالیت اصلی خود، مشارکت در ساخت پروژه‌های مسکونی و تجاری را نیز می‌پذیرد. تمرکز فعلی مجموعه بر پیمانکاری و اجرای تاسیسات است، اما برای بررسی پیشنهاد مشارکت می‌توانید با ما تماس بگیرید.",
+  title: "ساختمان‌سازی و مشارکت در ساخت",
+  desc: "آمود گستر آتیه در کنار اجرای تاسیسات، به‌عنوان مجری ساختمان‌های مسکونی، اداری و تجاری نیز فعال است؛ از طراحی و ساخت مجموعه‌های آمود ۱ تا ۶ در تهران و شمال کشور تا مشارکت در ساخت. تمرکز فعلی مجموعه بر پیمانکاری است، اما برای بررسی پیشنهاد مشارکت می‌توانید با ما تماس بگیرید.",
   href: "/blog/mosharekat-dar-sakht-rahnama",
   linkLabel: "راهنمای مشارکت در ساخت",
 };
@@ -99,7 +99,7 @@ export const featuredProjects: FeaturedProject[] = [
     desc: "اجرای تاسیسات الکتریکال و مکانیکال بلوک‌های مسکونی C و D با متراژ بیش از ۳۲٬۰۰۰ مترمربع.",
     client: "شرکت سامان محیط (بنیاد مسکن انقلاب اسلامی)",
     area: "+۳۲٬۰۰۰ مترمربع",
-    images: [],
+    images: ["/projects/ofogh-ekbatan-maskoni.png"],
     article: "projeh-ofogh-ekbatan",
   },
   {
@@ -108,7 +108,10 @@ export const featuredProjects: FeaturedProject[] = [
     desc: "اجرای تاسیسات الکتریکال برج‌های مسکونی همت یاس ۲ با متراژ بیش از ۶۰٬۰۰۰ مترمربع.",
     client: "شرکت ژالکه",
     area: "+۶۰٬۰۰۰ مترمربع",
-    images: ["/projects/Yas-Residential-Towers.webp"],
+    images: [
+      "/projects/hemmat-yas.jpg",
+      "/projects/Yas-Residential-Towers.webp",
+    ],
     article: "borj-haye-yas-hemmat",
   },
   {
@@ -117,7 +120,7 @@ export const featuredProjects: FeaturedProject[] = [
     desc: "اجرای تاسیسات الکتریکال، مکانیکال و موتورخانه بلوک‌های تجاری با متراژ بیش از ۱۶٬۰۰۰ مترمربع.",
     client: "شرکت سامان محیط (بنیاد مسکن انقلاب اسلامی)",
     area: "+۱۶٬۰۰۰ مترمربع",
-    images: [],
+    images: ["/projects/ofogh-ekbatan-tejari.png"],
   },
   {
     id: "negin-sahel",
@@ -139,7 +142,10 @@ export const featuredProjects: FeaturedProject[] = [
     client:
       "شرکت تولیدی خانه گستر / شرکت سرمایه‌گذاری توسعه نوین پایدار",
     area: "+۵۵٬۰۰۰ مترمربع",
-    images: ["/projects/Aseman-alborz.jpg"],
+    images: [
+      "/projects/Aseman-alborz.jpg",
+      "/projects/aseman-alborz-2.jpg",
+    ],
     article: "projeh-aseman-alborz",
   },
   {
@@ -148,7 +154,7 @@ export const featuredProjects: FeaturedProject[] = [
     desc: "اجرای تاسیسات الکتریکال بلوک B و C باغ‌موزه جواهرات ملی بانک مرکزی ایران با متراژ بیش از ۵۰٬۰۰۰ مترمربع.",
     client: "شرکت ژالکه",
     area: "+۵۰٬۰۰۰ مترمربع",
-    images: [],
+    images: ["/projects/muze-javaherat.png"],
     article: "muze-javaherat-melli",
   },
   {
@@ -157,7 +163,7 @@ export const featuredProjects: FeaturedProject[] = [
     desc: "اجرای موتورخانه‌ها و پمپ‌خانه‌های مرکزی و ارتباطی مجتمع اداری و تجاری جام خلیج فارس با متراژ بیش از ۱۱۰٬۰۰۰ مترمربع.",
     client: "شرکت روف تراس",
     area: "+۱۱۰٬۰۰۰ مترمربع",
-    images: [],
+    images: ["/projects/jam-khalij-fars.jpg"],
     article: "jam-khalij-fars",
   },
   {
@@ -166,8 +172,15 @@ export const featuredProjects: FeaturedProject[] = [
     desc: "اجرای تاسیسات الکتریکال و مکانیکال بلوک‌های C2a، C2b، تیپ A و تیپ B مجتمع مسکونی سروناز شامل ۱۲ بلوک با متراژ ۱۲۰٬۰۰۰ مترمربع.",
     client: "تعاونی مسکن اسکان گستر امید (امید دژبان)",
     area: "۱۲۰٬۰۰۰ مترمربع",
-    images: [],
+    images: ["/projects/sarvenaz.jpg"],
     article: "mojtame-sarvenaz",
+  },
+  {
+    id: "amoud-6",
+    title: "شهرک ویلایی آمود ۶",
+    desc: "طراحی و اجرای شهرک ویلایی آمود ۶، واقع در منطقه کته‌پشت شهرستان آمل.",
+    client: "بخش خصوصی",
+    images: [],
   },
 ];
 
@@ -198,5 +211,19 @@ export const otherProjects: OtherProject[] = [
   {
     title: "پروژه مسکونی ارغوان — ۷ بلوک، مجموعاً ۱۲۸ واحد",
     client: "تعاونی مسکن طلوع فجر",
+  },
+  {
+    title:
+      "طراحی و ساخت ساختمان مسکونی آمود ۵ — شهرک سروآزاد، منطقه ۲۲ تهران",
+  },
+  {
+    title: "طراحی و ساخت ساختمان مسکونی آمود ۴ — خیابان شاهین، منطقه ۵ تهران",
+  },
+  { title: "طراحی و ساخت ویلای آمود ۳ — حربده، شهرستان محمودآباد" },
+  {
+    title: "طراحی و ساخت ساختمان مسکونی آمود ۲ — شهرک گلستان، منطقه ۲۲ تهران",
+  },
+  {
+    title: "طراحی و ساخت ساختمان مسکونی آمود ۱ — شهرک گلستان، منطقه ۲۲ تهران",
   },
 ];
