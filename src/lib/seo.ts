@@ -14,7 +14,7 @@ export const ORG = {
   phoneDisplay: "۰۲۱-۴۴۷۱۱۲۲۲",
   mobile: "+989123505524",
   email: "AmudGostar.Co@Gmail.com",
-  street: "شهرک گلستان، بلوار امیرکبیر، بلوار هاشم‌زاده، رز ۲",
+  street: "شهرک گلستان، بلوار امیرکبیر، بلوار هاشم‌زاده، رز ۲، پلاک ۲۵، واحد ۲",
   city: "تهران",
   region: "تهران",
   country: "IR",
