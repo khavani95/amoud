@@ -92,6 +92,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fa" dir="rtl" className={vazir.variable}>
+      <head>
+        {/* Scroll-reveal content stays readable when JS is off or blocked. */}
+        <noscript>
+          <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="font-vazir bg-[#0a0a0c]">
         <PageTransition>{children}</PageTransition>
         <SpeedInsights />
