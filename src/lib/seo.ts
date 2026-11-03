@@ -18,7 +18,7 @@ export const ORG = {
   city: "تهران",
   region: "تهران",
   country: "IR",
-  geo: { lat: 35.7219, lng: 51.1889 }, // Shahrak-e Golestan, Tehran
+  geo: { lat: 35.747316, lng: 51.236273 }, // Office pin, Shahrak-e Golestan
 };
 
 /**

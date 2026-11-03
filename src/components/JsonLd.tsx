@@ -43,6 +43,7 @@ export function OrganizationJsonLd() {
             latitude: ORG.geo.lat,
             longitude: ORG.geo.lng,
           },
+          hasMap: `https://www.google.com/maps?q=${ORG.geo.lat},${ORG.geo.lng}`,
           areaServed: { "@type": "Country", name: "ایران" },
           knowsAbout: [
             "تاسیسات الکتریکال",
