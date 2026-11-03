@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import { MapPin, Phone, Smartphone, Mail, Globe } from "lucide-react";
 import { contact } from "@/data/company";
+import { ORG } from "@/lib/seo";
 
 const items = [
   {
@@ -98,11 +99,20 @@ export default function Contact() {
             <div className="overflow-hidden rounded-3xl border border-[var(--line)]">
               <iframe
                 title="نقشهٔ آمود گستر آتیه"
-                src="https://www.google.com/maps?q=Tehran%20Shahrak%20Golestan&output=embed"
+                src={`https://www.google.com/maps?q=${ORG.geo.lat},${ORG.geo.lng}&z=17&output=embed`}
                 className="w-full h-[360px] grayscale contrast-125 opacity-90"
                 loading="lazy"
               />
             </div>
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${ORG.geo.lat},${ORG.geo.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-ghost mt-4"
+            >
+              <MapPin className="h-4 w-4" />
+              مسیریابی در گوگل مپ
+            </a>
           </Reveal>
         </section>
       </main>
